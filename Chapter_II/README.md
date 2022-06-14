@@ -70,7 +70,7 @@ status destroy(seq_list *L){
 
 `IsEmpty(list)`
 
-judge is lenth empty; return OK if it's empty, return ERROR if it's not
+judge is the lenth empty; return OK if it's empty, return ERROR if it's not
 
 ```c
 status is_empty(seq_list *L){
@@ -421,3 +421,101 @@ int main()
 }
 ```
 
+## header link
+
+i think it's similar to singel linked list
+
+## double link
+
+the data struct add the pointer point to front node
+
+```c
+typedef struct node
+{
+    element_type n;
+    struct node* front;
+    struct node* back;    
+}node;
+
+typedef struct double_link
+{
+    node *head;
+    int n;
+}double_link;
+```
+
+### 1.init
+
+almost the same
+
+```c
+status init(double_link *L){
+    L->head = (node*)malloc(sizeof(node));
+    if(!L->head)
+        return ERROR;
+    L->head->front=0;
+    L->head->back=0;
+}
+```
+
+### 2.insert
+
+insert node after $a_i$,it's a little complicated, but just more a "unlink" step
+
+```c
+status insert(double_link *L, int i, element_type x){
+    node *p = L->head;
+    node *q = (node*)malloc(sizeof(node));
+    q->n = x;
+    for (int j = 0; j < i; j++)
+        p = p->back;
+    q->front=p;
+    q->back=p->back; 
+    p->back = q;
+    q->back->front = q;
+    return OK;
+}
+```
+
+![](../imgs/2_double_list.jpg)
+
+### 3.delete
+
+delete the node $a_i$
+
+this is called `unlink` in glibc, it can cause some serious security problems
+
+```c
+status delete(double_link *L, int i){
+    node *p = L->head;
+    for (int j = 0; j < i; j++)
+        p=p->back;
+    p->front->back = p->back;
+    p->back->front = p->front;
+    free(p);
+}
+```
+
+this code normally is vlunerable, you can read it on my blog:[Unlink](https://blog.joe1sn.top/2020/08/06/heap_learning_part2-Unlink/)
+
+## sequence VS. link
+
+### Time Performance
+
+- Data Access
+
+  ​	The one of specialties is random access structure.If you randomly access data and the time complexity is $O(1)$
+  ​	But the link list don't have this specialty,so it will take more time to find the data, and the time complexity is $O(n)$
+
+- Insert and Delete
+
+  ​	The link list once found the postion to operate, just need change the pointer to finished job.But sequence list need move data,and it's complexity is $O(n)$
+
+- Conclude
+
+  If we need frequently to insert or delete, link list is better
+  If we need frequently to access data, sequence list is better
+
+### Space Performance
+
+omit...
