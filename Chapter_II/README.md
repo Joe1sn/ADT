@@ -144,7 +144,7 @@ ignore the chekck we've done here, we move [i] to [i+1], it's $n-i$ times
 
 we assume the probability to insert is the same, so the probability is $P_i=\frac{1}{n+1}$(don't forget when i=-1)
 
-so the average value of insert a value after $a_i$ in a $n$ length seq_list is $E_i=\frac{1}{n+1}\times\sum^{n-1}_{i=-1} (n-i-1)=\frac{2}{n}$
+so the average value of insert a value after $a_i$ in a $n$ length seq_list is $E_i=\frac{1}{n+1}\times \sum_{i=-1}^{n-1} (n-i-1)=\frac{2}{n}$
 
 we get the average time complexity is $O(n)$
 
@@ -175,7 +175,7 @@ status delete(seq_list *L, int i){
 
 we do the $n-i-1$ times moving elements, assum the probability is delete index i: $P_i = \frac{1}{n}$
 
-then caculate the average time we moving elements: $E_d = \frac{1}{n}\times\sum^{n-1}_{i=0}(n-i-1)=\frac{n-1}{2}$
+then caculate the average time we moving elements: $E_d = \frac{1}{n}\times\sum_{i=0}^{n-1}(n-i-1)=\frac{n-1}{2}$
 
 we get the average time complexity is $O(n)$
 
