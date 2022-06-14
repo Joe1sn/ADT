@@ -252,7 +252,7 @@ int main()
 
 To fix these flaws, we using another storage structure: **Link**
 
-![](../imgs/2-link.jpg)
+<img src="../imgs/2-link.jpg" style="zoom:33%;" />
 
 so we can define a sig_link_list and node like
 
@@ -305,7 +305,7 @@ status find(sig_link_list *L, int i, element_type *x){
 
 we insert the new node after the node $a_i$, the steps like:
 
-![](../imgs/2-link2.jpg)
+<img src="../imgs/2-link2.jpg" style="zoom: 33%;" />
 
 ```c
 status insert(sig_link_list *L, int i, element_type x){
