@@ -245,5 +245,156 @@ int main()
 }
 ```
 
+## single linked list
 
+  the seq_list have some obviously flaws: insert or delete need to frequently moving elements, causing low computational efficiency and we need to allocate fixed max storage space.
+  if the space is too big, waste the storage, if it's too small, causing overflow, it's hard to change the space.
+
+To fix these flaws, we using another storage structure: **Link**
+
+![](../imgs/2-link.jpg)
+
+so we can define a sig_link_list and node like
+
+```c
+typedef int element_type;
+
+typedef struct node
+{
+    element_type element;
+    struct node *next;
+    
+}node;
+
+typedef struct sig_link_list
+{
+    node *first;
+    int n;
+}sig_link_list;
+```
+
+### 1.init
+
+```c
+status init(sig_link_list *L){
+    L->first = NULL;
+    L->n=0;
+    return OK;
+}
+```
+
+it's quit simple,because current we don't need to operate the nodes
+
+### 2.find
+
+if we want to find the value in singel linked list, we must follow the link till find the value
+
+```c
+status find(sig_link_list *L, int i, element_type *x){
+    if (i<-1 || i>L->n-1)
+        return ERROR;
+    node *temp = L->first;
+    for (size_t j = 0; j < i && temp->element != x; j++)
+        temp = temp->next;
+    *x = temp->element;
+    return OK;
+}
+```
+
+### 3.insert
+
+we insert the new node after the node $a_i$, the steps like:
+
+![](../imgs/2-link2.jpg)
+
+```c
+status insert(sig_link_list *L, int i, element_type x){
+    node *a_i,*in;
+    if (i<-1 || i>L->n-1)
+        return ERROR;
+    a_i = L->first;
+    for (size_t j = 0; j < i; j++)
+        a_i = a_i -> next;
+    in = (node*)malloc(sizeof(node));
+    if(i == -1) //new first
+    {
+        in->next = L->first;
+        L->first = in;
+    }
+    else
+    {
+        in->next = a_i->next;
+        a_i->next = in;
+    }
+    L->n++;
+    return OK;
+}
+```
+
+### 4.delete
+
+the ideas is
+
+1. find node before $a_i$($a_{i-1}$), set a pinter $q$ point to it
+2. if i is 0,delete the first node, else let $p$ point to $a_i$
+3. free space p point to
+4. node number minus 1
+
+```c
+status delete(sig_link_list *L, int i){
+    if (i<-1 || i>L->n-1 || !L->n) //1.check if the i is over boundary
+        return ERROR;
+    node *p = L->first;
+    node *q = L->first;
+    for (size_t j = 0; j < i-1; j++) //p=a_{i-1}
+        p=p->next;
+    if (i==0)
+        L->first=p->next;   //L->first = a_2
+    else
+    {
+        q=p->next;          //q=a_i
+        p->next = q->next;  //a_{i-1} = a_{i+1}
+        
+    }
+    free(q);
+    return OK;
+}
+```
+
+### 5.output
+
+```c
+status output(sig_link_list *L){
+    printf("link list have %d node\n",L->n);
+    node *temp = L->first;
+    for (size_t i = 0; i < L->n; i++)
+    {
+        printf("---The No.%d node\n",i+1);
+        printf("   value: %d\n",temp->element);
+        printf("   next: %p\n",temp->next);
+        temp=temp->next;
+    }
+}
+```
+
+### 6.destroy
+
+```c
+void destroy(sig_link_list *L){
+    node *temp;			//saving the next value
+    while(L->first->next){
+        temp = L->first->next;
+        free(L->first);
+        L->first = temp;//set new first
+    }
+}
+```
+
+### 7.main
+
+test program
+
+```c
+
+```
 

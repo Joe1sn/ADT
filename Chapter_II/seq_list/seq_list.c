@@ -1,6 +1,7 @@
 #include "seq_list.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <ADT/types.h>
 
 status init(seq_list *L, int m_size){
     L->max_length = m_size;

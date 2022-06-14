@@ -1,5 +1,7 @@
 {
     "files.associations": {
-        "seq_list.h": "c"
+        "seq_list.h": "c",
+        "types.h": "c",
+        "stdio.h": "c"
     }
 }

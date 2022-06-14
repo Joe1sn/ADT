@@ -3,7 +3,7 @@ DEBUG:= -g
 CFLAGS:= -std=c99
 INCLUDE:=-I ../../include
 
-main: $(SRC)/main.c $(SRC)/seq_list.c
+main: $(SRC)/main.c $(SRC)/link_list.c
 	gcc $(DEBUG) $(INCLUDE) $(CFLAGS) $^ -o $@
 
 .PHONY: clean
