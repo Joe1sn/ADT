@@ -152,3 +152,173 @@ int main(){
 }
 ```
 
+# Queue ADT
+
+​	The queue must insert at the tail, delete at the head, it's FIFO(First In First Out)
+​	The tail is called "rear", The head is called "front"
+
+![](../imgs/3-Queue.jpg)
+
+## ADT
+
+- Data
+  - 0 or multi data element constitute the linear sequence $(a_0, a_1 , … , a_{n-1})$, they’re one to one relationed
+  - the max length sets to max_size
+- Algorithm
+  - `create(q,max_size)`: Init a Queue **q** with max capacity of **max_size**
+  - `destroy(q)`: realse the stack **q** storage space allocated
+  - `is_empty(q)`: check the queue is empty
+  - `is_full(q)`: check the queue is full
+  - `front(q,x)`: get the head element in queue **q**,return it in **x**
+  - `en_queue(q,x)`: insert the element **x** to the end of **q**
+  - `de_queue(q)`: delete element in **q**
+  - `clear(q)`: wipe out the data in queue **q**, but not delete data
+
+## sequence queue
+
+​	refer to the figuration up here, we can define the struct like
+
+```c
+typedef struct queue
+{
+    int front;
+    int rear;
+    int max_size;
+    element_type *element;
+}queue;
+```
+
+![](D:\Pictures\typora\3-queue2-1655288561121.jpg)
+
+​	There's a phenomenon called "fake overflow",we need to use the loop queue. if this continued the `rear` pointer will get beyond `front` pointer.At this time we need to `front=(front+1)%max_size`;`rear=(rear+1)%max_size`
+
+​	if `rear == front`, the queue is an empty queue
+
+### create
+
+`create(q,max_size)`
+
+Init a Queue **q** with max capacity of **max_size**
+
+```c
+void create(queue *q, int max_size){
+    q->max_size = max_size;
+    q->element = (element_type *)malloc(max_size*sizeof(element_type));
+    q->front = q->rear = 0;
+}
+```
+
+### destroy
+
+`destroy(q)`
+
+realse the stack **q** storage space allocated
+
+```c
+void destroy(queue *q){
+    q->max_size=0;
+    free(q->element);
+    q->front=q->rear=-1;
+}
+```
+
+### is_empty & is_full
+
+```c
+status is_empty(queue *q){
+    return q->front == q->rear;
+}
+
+status is_full(queue *q){
+    return (q->rear+1)%q->max_size==q->front;
+}
+```
+
+### front
+
+`front(q,x)`
+
+get the head element in queue **q**,return it in **x**
+
+```c
+status front(queue *q, element_type *x){
+    if(is_empty(q))
+        return ERROR;
+    *x = q->element[(q->rear)%(q->max_size)];
+    return OK;
+}
+```
+
+### en_queue
+
+`en_queue(q,x)`
+
+insert the element **x** to the end of **q**
+
+```c
+status en_queue(queue *q, element_type x){
+    if(is_full(q))
+        return ERROR;
+    q->rear=q->rear%q->max_size+1; //moving rear
+    q->element[q->rear] = x;
+    return OK;
+}
+```
+
+### de_queue
+
+`de_queue(q)`
+
+delete element in **q**
+
+```c
+status de_queue(queue *q){
+    if(is_empty(q))
+        return ERROR;
+    q->front=(q->front+1)%q->max_size;
+    return OK;
+}
+```
+
+### clear
+
+`clear(q)`
+
+wipe out the data in queue **q**, but not delete data
+
+```c
+void clear(queue *q){
+    q->front = q->rear = 0;
+}
+```
+
+### main
+
+test program
+
+```c
+#include "queue.h"
+#include <stdlib.h>
+#include <stdio.h>
+
+int main()
+{
+    queue *Q = (queue*)malloc(sizeof(queue));
+    create(Q,11);
+    for (int i = 0; i < 20; i++)
+        en_queue(Q,i+1);
+    for (int i = 0; i < 10; i++)
+        printf("%d ",Q->element[i]);
+    printf("\n");
+    for (int i = 10; i > 0; i--)
+    {
+        printf("**Round : %d\n",10-i);
+        for (int j = 0; j <i; j++)
+            printf("-------No.%d is %d\n", j, Q->element[j+1]);
+        de_queue(Q);
+    }
+    return 0;
+    
+}
+```
+
