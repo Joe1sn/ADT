@@ -322,3 +322,217 @@ int main()
 }
 ```
 
+# Expression calculate
+
+​	The expression constitute with operate number, operate symbol and delimiter.According to different put in sequence, it can divided to three expressions: infix expression($a+b;$), prefix expression($+ab;$), postfix expression($ab+;$),we'll use the stack structure to calculate postfix expression.
+
+## postfix expression calculate
+
+The mainly algorithm about this method is:
+
+- scan the expression left to right
+- if it's an operate number, push it into stack
+- if it's an operate symbol, pop two element in stack and calculated it with this operate symbol, and push it into stack
+
+here is a demo: the neighbored operate number separate with space, just like `23.5 12.3-2.6*`, and only supported `+-*/^`
+
+- main function read postfix expression
+- using `is_legal` check the invaild character in expression
+- if it's valid, using `calculating` to evaluate the expression
+- `get_item` to catch the element,if it's operate symbol, call `do_calc` to evaluate
+
+### is_legal
+
+filter the character but `0~9 +-*/.^`
+
+```c
+status is_legal(char *postfix){
+    for (int i = 0; i < strlen(postfix); i++)
+    {
+        char c = postfix[i];
+        if( !((c>='0'&&c<='9') || c=='.' || c=='+' || c=='-'|| 
+                         c=='*'|| c=='/'|| c=='^'))
+            return ERROR;
+        return OK;
+    }
+}
+```
+
+### get_item
+
+`cur_pos`: get the current element then plus one.
+abnormal return -1, is number return 0, is operator return 1
+
+```c
+status get_item(char *postfix, int *cur_pos, char *item)
+{
+    int i = 0, k=*cur_pos;
+    status flag;
+    if(postfix[k]=='.') //the first number can not be .
+        flag = ABNORMAL;
+    else if(postfix[k]>='0' && postfix[k]<='9') //curren is number, next must be operator or number
+    {
+        while ( (postfix[k]>='0' && postfix[k]<='9') || postfix[k]=='.')
+            item[i++] = postfix[k++];
+        item[i] = '\0';
+        flag = ISNUM;
+    }
+    else    //is operator
+    {
+        item[0] = postfix[k++];
+        item[1] = '\0';
+        flag = ISOP;
+    }
+    while(postfix[k]==' ')//get the basic element
+        k++;
+    *cur_pos = k;
+    return flag;
+}
+```
+
+i think this could be much easlier if we using python
+we can let the postfix expression like `25 16 - 4 * `
+in python, pseudo-code be like:
+
+```python
+def get_item(exp):
+    exp = exp.split(' ')
+	for e in exp:
+        if e.is_number(): do_sth()
+        elif e in operator: do_sth()
+        else: return_error()
+```
+
+
+
+### do_calc
+
+this is the core function the `calculating` used
+
+```c
+void do_calc(stack *s, char op)
+{
+    double rvalue,lvalue;
+    if(!top(s,&rvalue)) //pop right value
+        exit(0);
+
+    pop(s);
+
+    if(!top(s,&lvalue)) //pop left value
+        exit(0);
+    pop(s);
+    switch (op)
+    {
+    case '+':
+        push(s,lvalue+rvalue);
+        break;
+    case '-':
+        push(s,lvalue-rvalue);
+        break;
+    case '*':
+        push(s,lvalue*rvalue);
+        break;
+    case '/':
+        if(fabs(rvalue)==0){
+            printf("can't divid 0\n");
+            exit(0);
+        }
+        push(s,lvalue/rvalue);
+        break;
+    case '^':
+        push(s,pow(lvalue,rvalue));
+        break;
+    default:
+        break;
+    }
+    
+}
+```
+
+### calculating
+
+according to the `get_item` returned result
+
+- is number: push into stack
+- is op: calc
+- other: get error
+
+```c
+element_type calculating(char *postfix)
+{
+    stack *s = (stack *)malloc(sizeof(stack));
+    char item[max_item];    //store operator
+    element_type data;
+    status flag = ABNORMAL;
+    int cur_pos = 0;
+
+    while (postfix[cur_pos]==' ')   //filter space
+        cur_pos++;
+
+    create(s,max_item); //creating stack
+    while (cur_pos < strlen(postfix)) //start scanning
+    {
+        flag = get_item(postfix, &cur_pos, item);
+        if(flag == ABNORMAL)
+        {
+            printf("abnormal: invalid element!\n");
+            exit(0);
+        }
+        else if (flag == ISOP)
+        {
+            switch (item[0])
+            {
+            case '+':
+            case '-':
+            case '*':
+            case '/':
+            case '^':
+                do_calc(s,item[0]);
+                break;
+            }
+        }
+        else //is number
+        {
+            data = atof(item);//return string to float
+            push(s,data);
+        }   
+    }
+    if(s->top == 0) //only got one element in stack
+        top(s, &data);
+    else{
+        printf("abnoraml: have redundant operator!");
+        exit(0);
+    }
+    destroy(s);
+    return data;
+}
+```
+
+### main
+
+```c
+int main()
+{
+    char postfix[postfix_size];
+    printf("please input the postfix expression:\n");
+    gets(postfix);
+    if(!is_legal(postfix))
+    {
+        printf("abnormal: have invalid character in postfix\n");
+        return ERROR;
+    }
+    //two decimal places
+    printf("%s = %.2f\n",postfix,calculating(postfix));
+    return 0;
+}
+```
+
+##  infix to postfix
+
+​	Even postfix expression is easy for computer to read,but not human is easy to.So we need transfer infix to postfix expression, then let computer calculated it.
+
+- Init the stack, `#` standard for starting push into stack
+- scan element from left to right
+  - if it is number, output
+  - if it is `)`, keep output till meet `(`
+  - if it is operator or `(`, compare the pirority

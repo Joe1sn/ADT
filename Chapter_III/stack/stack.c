@@ -35,7 +35,7 @@ status top(stack *s,  element_type *x){
 status push(stack *s, element_type x){
     if (is_full(s))
         return ERROR;
-    s->element[s->top++] = x;
+    s->element[++s->top] = x;
     return OK;
 }
 

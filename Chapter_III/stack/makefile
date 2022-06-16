@@ -8,4 +8,8 @@ main: $(SRC)/main.c $(SRC)/stack.c
 
 .PHONY: clean
 clean:
-	del main.exe
+	del main.exe calc.exe
+
+.PHONY: calc
+calc: $(SRC)/postfix_calc.c $(SRC)/stack.c
+	gcc $(DEBUG) $(INCLUDE) $(CFLAGS) $^ -o $@
