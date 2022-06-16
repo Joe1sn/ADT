@@ -535,4 +535,21 @@ int main()
 - scan element from left to right
   - if it is number, output
   - if it is `)`, keep output till meet `(`
-  - if it is operator or `(`, compare the pirority
+  - if it is operator or `(`, compare the pirority: InComming and in-stack
+    - InComming and in-stack: output stack till InComming and in-stack
+- after scanning, output the stack
+
+About the ICP and ISP, we can set the value to compare it
+
+| Operator | `#`  | `(`  | `* /` | `+ -` | `)`  |
+| -------- | ---- | ---- | ----- | ----- | ---- |
+| ICP      | 0    | 7    | 4     | 2     | 1    |
+| ISP      | 0    | 1    | 5     | 3     | 7    |
+
+It's easy to accomplished the program
+
+# recursion
+
+it's useful tools to write program,but in here
+
+Omit.
