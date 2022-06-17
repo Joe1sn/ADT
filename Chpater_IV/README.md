@@ -219,3 +219,111 @@ int main()
     return 0;
 }
 ```
+
+## Maxtri
+
+### sparse maxtrix ADT
+
+- Data
+
+  matrix most element value is 0
+
+- Algorithm
+
+  `create_sparse_matrix(A, m, n)`: create an empty sparse matrix
+
+  `clear_sparse_matrix(A)`: wipe data in maxtrix
+
+  `store_sparse_matrix_item(A,i,j,x)`: set `matrix[i][j]=x`
+
+  `retrieve_sparse_matrix(A,i,j)`: get the `matrix[i][j]` value
+
+  `output_sparse_matrix(A)`
+
+  `transpose_sparse_matrix(A)`: transpose the matrix A
+
+  `add_spares_matrix(A,B)`: $A=A+B$
+
+  `multi_sparse_matrix(A,B)`: $A=A*B$
+
+### algorithm design
+
+​	Because sparse matrix has tons of junk data 0, in order to saving space, we can store the data which is not 0 in a sheet, the sheet contained $<row number, column number,value>$ each line. The pirority could be row-first or column-first.
+​	If a sparse matrix like
+$$
+\begin{bmatrix}
+-5&-2&0&0&0&0 \\
+0&0&0&-6&0&0 \\
+0&0&0&0&0&0\\
+0&-3&0&0&0&0\\
+-7&0&0&-4&0&0\\
+0&0&-1&0&0&0
+\end{bmatrix}
+$$
+the row-first Triad be like
+
+|      | i    | j    | $a_{ij}$ |
+| ---- | ---- | ---- | -------- |
+| 0    | 0    | 0    | -5       |
+| 1    | 0    | 1    | -2       |
+| 2    | 1    | 3    | -6       |
+| 3    | 3    | 1    | -3       |
+| 4    | 4    | 0    | -7       |
+| 5    | 4    | 3    | -4       |
+| 6    | 5    | 2    | -1       |
+
+#### transpose
+
+most common method is
+
+```c
+for(int i=0; i<m; i++)
+    for(int j=0; i<n; j++)
+        B[i][j]=A[j][i]
+```
+
+​	but this need scan all element in A, if we transpose an sparse matrix, the junk data 0 caused waste of time.
+
+​	keep this way of thinking, we just need operate data in Triad
+
+​	the fast transpose method need more storage space, but it's $O(n+t)$
+
+- one-dimensional auxiliary array: `k` `num`
+
+  - `num` store the sum of element numbers not equal to 0 in $j$ column
+
+    ```c
+    for(int i=0; i<t; i++)
+        num[A->table[i].col]++;
+    ```
+
+  -  `k[j]` store the sum of not 0 elements in column from $0$ to $j-1$
+
+    ```c
+    for(int i=0; i<n; i++)
+        k[i]=k[i+1]+num[i-1];
+    ```
+
+- auxiliary function
+
+  ```c
+  for(int i=0; i<t; i++){
+  	int index = l[A->table[i]->col]++;
+      B->table[index].col=A->table[i].row;
+      B->table[index].row=A->table[i].col;
+      B->table[index].value=A->table[i].value;
+  }   
+  ```
+
+the sparse matrix we take example above, could be like
+
+| j        | 0    | 1    | 2    | 3    | 4    | 5    |
+| -------- | ---- | ---- | ---- | ---- | ---- | ---- |
+| `num[j]` | 2    | 2    | 1    | 2    | 0    | 0    |
+| `k[j]`   | 0    | 2    | 4    | 5    | 7    | 7    |
+
+# String
+
+## ADT
+
+## string match
