@@ -4,6 +4,7 @@
         "types.h": "c",
         "stdio.h": "c",
         "stack.h": "c",
-        "stdlib.h": "c"
+        "stdlib.h": "c",
+        "array.h": "c"
     }
 }
