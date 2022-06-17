@@ -249,17 +249,11 @@ int main()
 ### algorithm design
 
 ​	Because sparse matrix has tons of junk data 0, in order to saving space, we can store the data which is not 0 in a sheet, the sheet contained $<row number, column number,value>$ each line. The pirority could be row-first or column-first.
+
 ​	If a sparse matrix like
-$$
-\begin{bmatrix}
--5&-2&0&0&0&0 \\
-0&0&0&-6&0&0 \\
-0&0&0&0&0&0\\
-0&-3&0&0&0&0\\
--7&0&0&-4&0&0\\
-0&0&-1&0&0&0
-\end{bmatrix}
-$$
+
+$ \begin{bmatrix} -5&-2&0&0&0&0 \\ 0&0&0&-6&0&0 \\ 0&0&0&0&0&0\\ 0&-3&0&0&0&0\\ -7&0&0&-4&0&0\\ 0&0&-1&0&0&0 \end{bmatrix} $
+
 the row-first Triad be like
 
 |      | i    | j    | $a_{ij}$ |
