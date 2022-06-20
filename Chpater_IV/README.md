@@ -320,4 +320,364 @@ the sparse matrix we take example above, could be like
 
 ## ADT
 
+- data
+
+  A string is consists of  specific sequence characters like $a_0a_1a_2...a_n$
+
+- algorithm
+
+  `create_str(s,max_len)`:  create max_len size to storage string s, initial with 0
+
+  `len(s)`: return the length of the string s
+
+  `clear(s)`: set string to an empty string
+
+  `insert(s,p,pos)` : pretty similar to sequence list's insert. Insert `p` to `s[pos]` and other behind move back `len(p)`
+
+  `remove(s,pos,len)`: cut down substring `s[pos:len]`, and the charaters after `s[pos:len]` move front  `len`
+
+  `substring(s,pos,len)`:  return a substring  start in pos with length len
+
+  `index(s, p ,pos)`: jugde if in `s[pos:]` contain substring `p`
+
+so, using C give it a struct
+
+```c
+typedef struct mystr
+{
+    char *str;
+    int len,max_len;
+};
+```
+
+### create
+
+`create_str(s,max_len)`
+
+create max_len size to storage string s, initial with 0
+
+```c
+status create(mystr *s,int len){
+    s->len = 0;
+    s->max_len = len;
+    s->str = (char *)malloc(s->max_len);
+    if(!s->str)
+        return ERROR;
+    for (int i = 0; i < s->len; i++)
+        s->str[i] = (char)0;
+    return OK;
+}
+```
+
+### len
+
+`len(s)`: return the length of the string `s`
+
+```c
+int len(mystr *s){
+    int len = 0;
+    if(!s->str)
+        return ERROR;
+    for (int i = 0; s->str[i]; i++)
+        len++;
+    s->len = len;
+    return len;
+}
+```
+
+### clear
+
+`clear(s)`: set string to an empty string
+
+```c
+status clear(mystr *s){
+    if(!s->str)
+        return ERROR;
+    for (int i = 0; i < s->len; i++)
+        s->str[i]=(char)0;
+    s->len=0;
+    return OK;
+}
+```
+
+### insert
+
+`insert(s,p,pos)` : pretty similar to sequence list's insert. Insert `p` to `s[pos]` and other behind move back `len(p)`
+
+Omit.
+
+### remove
+
+`remove(s,pos,len)`: cut down substring `s[pos:len]`, and the charaters after `s[pos:len]` move front  `len`
+
+Omit.
+
+### substring
+
+`substring(s,pos,len)`:  return a substring  start in pos with length len
+
+Omit.
+
 ## string match
+
+`index(s, p ,pos)`: jugde if in `s[pos:]` contain substring `p`
+
+>  推荐：https://www.bilibili.com/video/BV1AY4y157yL
+
+we have main string `s` and substring `p`
+
+### Easiest
+
+```c
+int match(mystr *s, mystr *p, int s_start, int p_start, int *s_failed, int *p_failed){
+    int i = s_start, j = p_start;
+    for (; j < p->len; i++,j++)
+    {
+        if(s->str[i] != p->str[j])
+        {
+            *s_failed = i;
+            *p_failed = j;
+            return ERROR;
+        }
+    }
+    return OK;
+}
+```
+
+```c
+int index(mystr *s, mystr *p, int pos){
+    int s_start=pos, p_start=0, s_failed, p_failed;
+    for (s_start; s_start <= s->len - p->len ; s_start++)
+    {
+        if (match(s,p,s_start,p_start,&s_failed,&p_failed))
+            return s_start;
+    }
+    return ABNORMAL;
+}
+```
+
+But it's not efficient enough, we waste a lot of time to do same compare
+
+### KMP
+
+Highly accomand the video https://www.bilibili.com/video/BV1AY4y157yL
+
+The KMP algorithm is a typically DP(Dynamic Programming) problem, it uses `next` array for saving time.
+
+![](../imgs/4-string.jpg)
+
+The max prefix equals postfix's length is **1**
+
+let do match
+
+![](../imgs/4_string2.jpg)
+
+here: `main[i] != sub[j]` $i=4,j=4$, **Using `Next_B`**
+
+so the characters before the i in main and j in sub is the same
+
+$sub[0]=main[i-j],sub[1]=main[i-j+1]...$
+
+get the substring equation $sub[0,j-1]=main[i-j,i-1]$
+
+but we kown **the longest equal prefix and suffix substring's length** of $sub[0:j-1]$ is `"AB"`,  length $k=2$. so $sub[0]=sub[j-k],sub[1]=sub[j-k+1]$
+Take this recursively, $sub[0,k-1]=sub[j-k,j-1]$
+
+-  $sub[0,j-1]=main[i-j,i-1]$
+
+  according they have the same length
+
+  - $sub[0,k-1]=main[i-j,i-j+(k-1)]$
+  - $sub[j-k,j-1]=main[i-k,i-1]$
+
+-  $sub[0,k-1]=sub[j-k,j-1]$
+
+finally we would get
+
+$sub[0,k-1]=sub[j-k,j-1]=main[i-k,i-1]$
+
+`sub[0:1]=main[2:3]` (`"AB"=="AB"`)
+
+So we can jump over $j-k$ and continue compare.
+
+Becaues this time the pointer point to main string is always keep forward, it's an $O(n)$ algorithm
+
+How to build `next` array?
+
+if we compare the character, it will be three results:
+
+- `next[0] == -1`, `i = 1` , `prefix_len = 0`
+- `patt[prefix_len]==patt[i]`
+  - `prefix_len+=1` `i+=1`
+  - `next[i]=prefix_len`
+- `else`
+  - `if prefix_len == 0`
+    - `next[i]=0`
+    - `i+=1`
+  - `else`
+    - `prefix_len = next[prefix_len-1]`
+
+#### build next
+
+##### build_nextA
+
+using c would be like
+
+```c
+void build_nextA(mystr *p, int next[]){
+    next[0]=0;
+    int prefix=0,i=1;
+    while (i<p->len)
+    {
+        if (p->str[prefix] == p->str[i])
+        {
+            prefix++;
+            next[i]=prefix;
+            i++;
+        }
+        else
+        {
+            if (prefix==0)
+            {
+                next[i]=0;
+                i++;
+            }
+            else
+                prefix = next[prefix - 1];
+        }   
+    }
+}
+```
+
+##### build_nextB
+
+```c
+void build_nextB(mystr *p, int next[]){
+    int j = 0, k =-1;
+    next[0]=-1;
+    while (j < p->len)
+    {
+        if (k==-1||p->str[j]==p->str[k])
+        {
+            ++j;++k;
+            next[j]=k;
+        }
+        else
+            k=next[k];
+    }
+}
+```
+
+
+
+#### build KMP
+
+##### KMP_A
+
+**Finally** time to write a full KMP algorithm
+
+```c
+int KMP_A(mystr *s, mystr *p, int next[]){
+    int s_start = 0, p_start = 0;
+    while (s_start <= s->len)
+    {
+        if (s->str[s_start]==p->str[p_start])
+        {   ++s_start; ++p_start;   }
+        else if (p_start > 0)
+            p_start = next[p_start -1];
+        else
+            ++s_start;
+
+        if (p_start == p->len)
+            return s_start - p_start;
+        
+    }   
+}
+```
+
+##### KMP_B
+
+first define function `match`
+
+```c
+int match(mystr *s, mystr *p, int s_start, int p_start, int *s_failed, int *p_failed){
+    int i = s_start, j = p_start;
+    for (; j < p->len; i++,j++)
+    {
+        if(s->str[i] != p->str[j])
+        {
+            *s_failed = i;
+            *p_failed = j;
+            return ERROR;
+        }
+    }
+    return OK;
+}
+```
+
+then KMP_B
+
+```c
+int KMP_B(mystr *s, mystr *p, int next[]){
+    int s_start = 0, p_start = 0, s_failed, p_failed;
+    while (s_start <= s->len - p->len)
+    {
+        if (match(s,p,s_start,p_start, &s_failed, &p_failed))
+            return s_start - p_start;
+        else
+        {
+            p_start = next[p_failed];
+            s_start = s_failed;
+            if(p_start == -1)
+            {
+                p_start = 0;
+                s_start++;
+            }
+        }
+        
+    }
+    return ABNORMAL;
+}
+```
+
+#### test funtion
+
+```c
+int main(){
+    char *main = "ABABABCAA";
+    char *sub = "ABABC";
+
+    mystr *s = (mystr *)malloc(sizeof(mystr));
+    mystr *p = (mystr *)malloc(sizeof(mystr));
+    create(s,strlen(main)+0x10);
+    create(p,strlen(sub)+0x10);
+    
+    strcpy(s->str,main);
+    s->len=(strlen(s->str));
+    strcpy(p->str,sub);
+    p->len=(strlen(p->str));
+
+
+    printf("mystr S is: %s\n",s->str);
+    printf("mystr P is: %s\n",p->str);
+
+    int next[p->len];
+    build_nextA(p,next);
+    printf("KMP_A: %d\n",KMP_A(s,p,next));
+    build_nextB(p,next);
+    printf("KMP_B: %d\n",KMP_B(s,p,next));
+    printf("index: %d\n",index(s,p,0));
+    return 0;
+}
+```
+
+output
+
+```
+mystr S is: ABABABCAA
+mystr P is: ABABC    
+KMP_A: 2
+KMP_B: 2
+index: 2
+```
+

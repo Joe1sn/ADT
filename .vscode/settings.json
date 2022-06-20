@@ -5,6 +5,8 @@
         "stdio.h": "c",
         "stack.h": "c",
         "stdlib.h": "c",
-        "array.h": "c"
-    }
+        "array.h": "c",
+        "mystr.h": "c"
+    },
+    "C_Cpp.errorSquiggles": "Disabled"
 }
