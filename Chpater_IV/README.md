@@ -680,3 +680,141 @@ KMP_A: 2
 KMP_B: 2
 index: 2
 ```
+
+# DP-recursive
+
+1. https://leetcode.cn/problems/fibonacci-number/
+
+   > \509. Fibonacci Number
+   >
+   > The **Fibonacci numbers**, commonly denoted `F(n)` form a sequence, called the **Fibonacci sequence**, such that each number is the sum of the two preceding ones, starting from `0` and `1`. That is,
+   >
+   > ```
+   > F(0) = 0, F(1) = 1
+   > F(n) = F(n - 1) + F(n - 2), for n > 1.
+   > ```
+   >
+   > Given `n`, calculate `F(n)`.
+
+   ```cpp
+   int fib(int n){
+       int i;
+       int f[31]={0,1};
+       for(i=2; i<=n; i++)
+           f[i]=f[i-1]+f[i-2];
+       return f[n];
+   }
+   ```
+
+   recursion is one of the simplest state transition.
+
+2. https://leetcode.com/problems/climbing-stairs/
+
+   > You are climbing a staircase. It takes `n` steps to reach the top.
+   >
+   > Each time you can either climb `1` or `2` steps. In how many distinct ways can you climb to the top?
+
+   If we climb to stair[i], it can comes from stair[i-1] or stair[i-2] .so the ways to stair[i] is ways to stair[i-1] and stair[i-2], $f[i]=f[i-1]+f[i-2]$, the is the same to fibonacci numbers.
+
+   We can called $f[i]=f[i-1]+f[i-2]$ state transition equation, the state `f[i-1]`  trans to `f[i-2]`
+
+   the initial state is `f[0]=1` `f[1]=1`
+
+   ```c
+   int climbStairs(int n){
+       int i;
+       int f[46]={1,1};
+       for(i=2; i<=n; ++i)
+           f[i]=f[i-1]+f[i-2];
+       return f[n];
+   }
+   ```
+
+   or to save more space
+
+   ```c
+   int climbStairs(int n){
+       int i;
+       int a=1,b=1;
+       for(i=2; i<=n; ++i)
+       {
+           a=a+b;
+           b=a-b;
+       }
+       return a;
+   }
+   ```
+
+3.  https://leetcode.com/problems/min-cost-climbing-stairs/
+
+   > You are given an integer array `cost` where `cost[i]` is the cost of `ith` step on a staircase. Once you pay the cost, you can either climb one or two steps.
+   >
+   > You can either start from the step with index `0`, or the step with index `1`.
+   >
+   > Return *the minimum cost to reach the top of the floor*.
+
+   It's pretty same to the staircase problem, the different is now we have a cost array
+
+   $f[i] = min\{f[i-1]+cost[i-1],f[i-2]+cost[i-2]\}$
+
+   Here is initial state:`f[0]=0`  `f[1]=0`
+
+   ```CQL
+   int min(int a, int b){
+       return a < b ? a : b;
+   }
+   
+   int minCostClimbingStairs(int* cost, int costSize){
+       int i;
+       int f[10001]={0,0};
+       for( i=2; i<= costSize; i++)
+           f[i]=min(f[i-1]+cost[i-1],f[i-2]+cost[i-2]);
+       return f[costSize];
+   }
+   ```
+
+4. https://leetcode.com/problems/maximum-subarray/
+
+   > Given an integer array `nums`, find the contiguous subarray (containing at least one number) which has the largest sum and return *its sum*.
+   >
+   > A **subarray** is a **contiguous** part of an array.
+
+   state trans equation $dp[i]=max\{dp[i-1]+nums[i],nums[i]\}$
+
+   ```c
+    int max(int a, int b){
+       return a>b?a:b;
+   }
+   int maxSubArray(int* nums, int numsSize){
+       int i;
+       int f[100001]={nums[0]};
+       int max_value = nums[0];
+       for(i=1; i<numsSize; ++i){
+           f[i] = max(f[i-1]+nums[i],nums[i]);
+           max_value = max(max_value,f[i]);
+       }
+       return max_value;
+   }
+   ```
+
+   or
+
+   ```c
+   int max(int a, int b){
+       return a > b ? a : b;
+   }
+   int maxSubArray(int* nums, int n){
+       int i,tmp;
+       int a=nums[0],b=0;
+       int max_value = nums[0];
+       for(i=1; i<n; ++i){
+           tmp = a;
+           a = max(a+nums[i],nums[i]);
+           b = tmp;
+           max_value = max(max_value,a);
+       }
+       return max_value;
+   }
+   ```
+
+   
