@@ -64,8 +64,7 @@ void build_nextA(mystr *p, int next[]){
         if (p->str[prefix] == p->str[i])
         {
             prefix++;
-            next[i]=prefix;
-            i++;
+            next[i++]=prefix;
         }
         else
         {
