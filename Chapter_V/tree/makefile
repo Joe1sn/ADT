@@ -1,7 +1,11 @@
 SRC:=.
 DEBUG:= -g
-CFLAGS:= -std=c99
+CFLAGS:= -std=c11
 INCLUDE:=-I ../../include
+
+.PHONY: bt_test
+bt_test: $(SRC)/bt_test.c $(SRC)/bin_tree.c
+	gcc $(DEBUG) $(INCLUDE) $(CFLAGS) $^ -o $@
 
 .PHONY: clean
 clean:
@@ -9,8 +13,4 @@ clean:
 
 .PHONY: calc
 calc: $(SRC)/postfix_calc.c $(SRC)/stack.c
-	gcc $(DEBUG) $(INCLUDE) $(CFLAGS) $^ -o $@
-
-PHONY .bt_test
-bt_test: $(SRC)/bt_test.c $(SRC)/bt_tree.c
 	gcc $(DEBUG) $(INCLUDE) $(CFLAGS) $^ -o $@

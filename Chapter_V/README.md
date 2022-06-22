@@ -118,12 +118,12 @@ void create(bin_tree * bt){
 `new_node(x，ln，rn)`: 创建一个新结点，该结点的值为x，ln和rn为该结点的左右孩子结点。
 
 ```c
-bt_node *new_node(element_type x, bin_tree *ln, bin_tree *rn){
-    bt_node *bt_node = (bt_node *)malloc(sizeof(bt_node));
-    bt_node->element = x;
-    bt_node->l_child = ln;
-    bt_node->r_child = rn;
-    return bt_node;
+bt_node *new_node(element_type x, bt_node *ln, bt_node *rn){
+    bt_node *p = (bt_node *)malloc(sizeof(bt_node));
+    p->element = x;
+    p->l_child = ln;
+    p->r_child = rn;
+    return p;
 }
 ```
 
@@ -160,7 +160,7 @@ BOOL root(bin_tree *bt, element_type *x){
 
 ```c
 void make_tree(bin_tree *bt, element_type e, bin_tree *ln, bin_tree *rn){
-    if(!bt->root || ln == rn)
+    if(bt->root || ln == rn)
         return;
     bt->root = new_node(e, ln->root, rn->root);
     ln->root = rn->root = NULL;
@@ -169,14 +169,171 @@ void make_tree(bin_tree *bt, element_type e, bin_tree *ln, bin_tree *rn){
 
 # 二叉树遍历
 
+要实现的功能
+
 `preorder_tree(bt)`: 先序遍历二叉树bt。
 `inorder_tree(bt)`: 中序遍历二叉树bt。
 `postOrder_tree(bt)`: 后序遍历二叉树bt。
 `levelorder_tree(bt)`: 层次遍历二叉树bt。
 
+### 递归遍历
 
+既然每个子节点都是一个树，那为什么不用递归去遍历呢？
 
+先不考虑二叉树为空的情况，有以下的递归遍历方法
 
+- **先序遍历(VLR)**
+
+  根节点 -> 先序遍历(左子树) -> 先序遍历(右子树)
+
+- **中序遍历(LVR)**
+
+  中序遍历(左子树) -> 根节点 -> 中序遍历(右子树)
+
+- **后序遍历(LRV)**
+
+  后序遍历(左子树) -> 后序遍历(右子树) -> 根节点
+
+![](../imgs/5-traverse.jpg)
+
+尝试用递归的思想理解
+
+#### 先序遍历
+
+`preorder_tree(bt)`: 先序遍历二叉树bt。
+
+```c
+void preorder_tree(bin_tree *bt){
+    preorde(bt);
+}
+//VLR
+void preorder(bt_node *bn){
+    if (!bn)
+        return;
+    printf("%c",bn->element);
+    printf("%c",preorde(bn->l_child));
+    printf("%c",preorde(bn->r_child));
+}
+```
+
+#### 中序遍历
+
+`inorder_tree(bt)`: 中序遍历二叉树bt。
+
+```c
+//VLR
+void preorder_tree(bin_tree *bt){
+    preorder(bt->root);
+}
+void preorder(bt_node *bn){
+    if (!bn)
+        return;
+    printf("%c ",bn->element);
+    preorder(bn->l_child);
+    preorder(bn->r_child);
+}
+
+//LVR
+void inorder_tree(bin_tree *bt){
+    inorder(bt->root);
+}
+void inorder(bt_node *bn){
+    if (!bn)
+        return;
+    inorder(bn->l_child);
+    printf("%c ",bn->element);
+    inorder(bn->r_child);
+}
+```
+
+#### 后序遍历
+
+`postOrder_tree(bt)`: 后序遍历二叉树bt。
+
+```c
+//LVR
+void inorder_tree(bin_tree *bt){
+    inorder(bt->root);
+}
+void inorder(bt_node *bn){
+    if (!bn)
+        return;
+    inorder(bn->l_child);
+    printf("%c ",bn->element);
+    inorder(bn->r_child);
+}
+```
+
+#### 小测试
+
+注意：我们还没有写回收函数，只能让程序退出时操作系统回收内存，但是这里仅仅只验证遍历算法是否正确
+
+1. 构建二叉树
+
+   ```c
+       bin_tree a,b,x,y,z;
+       create(&a);
+       create(&b);
+       create(&x);
+       create(&y);
+       create(&z);
+   
+       make_tree(&y,'E',&a,&b);
+       make_tree(&z,'F',&a,&b);
+       make_tree(&x,'C',&y,&z);
+       make_tree(&y,'D',&a,&b);
+       make_tree(&z,'B',&y,&x);
+   ```
+
+   虽然这里`bin_tree`都是保存在栈上面的，但是
+
+   `make_tree`调用的`new_node`节点是使用的`malloc`函数分配的，所以节点的链接是不会改变的
+
+   ```c
+   bt_node *new_node(element_type x, bt_node *ln, bt_node *rn){
+       bt_node *p = (bt_node *)malloc(sizeof(bt_node));
+       p->element = x;
+       p->l_child = ln;
+       p->r_child = rn;
+       return p;
+   }
+   ```
+
+   关于调用过程
+
+   ![](../imgs/5-tree.jpg)
+
+2. 遍历二叉树
+
+   ```c
+       printf("preorder: ");
+       preorder_tree(&z);
+   
+       printf("\ninorder: ");
+       inorder_tree(&z);
+   
+       printf("\npostorder: ");
+       postorder_tree(&z);
+       printf("\n");
+   ```
+
+   那么
+
+   - 先序遍历：BDCEF
+   - 中序遍历：DBECF
+   - 后序遍历：DEFCB
+
+   结果
+
+   ```
+   preorder: B D C E F
+   inorder: D B E C F
+   postorder: D E F C B
+   ```
+
+   发现没有问题
+
+`levelorder_tree(bt)`: 层次遍历二叉树bt。
 
 # 树和森林
 
