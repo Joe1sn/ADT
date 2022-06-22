@@ -25,6 +25,9 @@ int main()
 
     printf("\npostorder: ");
     postorder_tree(&z);
+
+    printf("\nlevel order tree: ");
+    level_order_tree(&z);
     printf("\n");
 
     return 0;

@@ -7,7 +7,7 @@ make.exe all --print-data-base --no-builtin-variables --no-builtin-rules --quest
 # There is NO WARRANTY, to the extent permitted by law.
  
 
-# Make data base, printed on Wed Jun 22 17:14:41 2022
+# Make data base, printed on Wed Jun 22 19:47:33 2022
 
 # Variables
 
@@ -32,14 +32,14 @@ HOMEDRIVE = C:
 # automatic
 ^D = $(patsubst %/,%,$(patsubst %\,%,$(dir $^)))
 # makefile
-CURDIR := d:/Github/ADT
+CUR 
+DIR := d:/Github/ADT
 # default
 SHELL := sh.exe
 # environment
 WINDIR = C:\WINDOWS
 # environment
-VSCODE_NLS_CONFIG = {"locale":"zh-cn","availableLanguages":{"*":"zh-cn"},"_languagePackId":"bbca1a7059cee8a1b93da8947fee1c4f.zh-cn","_translationsConfigFile":"C:\\Users\\13013\\AppData\\Roaming\\Code\\clp\\bbca1a7059cee8a1b93da8947fee1c4f.zh-cn\\tcf.json","_cacheRoot":"C:\\Users\\13013\\AppData\\Roaming\\Code\\clp\\bbca1a7059cee8a1b93da8947fee1c4f.zh-cn","_resolvedLanguagePackCoreLocation":"C:\\Users\\13013\\AppDa 
-ta\\Roaming\\Code\\clp\\bbca1a7059cee8a1b93da8947fee1c4f.zh-cn\\30d9c6cd9483b2cc586687151bcbcd635f373630","_corruptedFile":"C:\\Users\\13013\\AppData\\Roaming\\Code\\clp\\bbca1a7059cee8a1b93da8947fee1c4f.zh-cn\\corrupted.info","_languagePackSupport":true}
+VSCODE_NLS_CONFIG = {"locale":"zh-cn","availableLanguages":{"*":"zh-cn"},"_languagePackId":"bbca1a7059cee8a1b93da8947fee1c4f.zh-cn","_translationsConfigFile":"C:\\Users\\13013\\AppData\\Roaming\\Code\\clp\\bbca1a7059cee8a1b93da8947fee1c4f.zh-cn\\tcf.json","_cacheRoot":"C:\\Users\\13013\\AppData\\Roaming\\Code\\clp\\bbca1a7059cee8a1b93da8947fee1c4f.zh-cn","_resolvedLanguagePackCoreLocation":"C:\\Users\\13013\\AppData\\Roaming\\Code\\clp\\bbca1a7059cee8a1b93da8947fee1c4f.zh-cn\\30d9c6cd9483b2cc586687151bcbcd635f373630","_corruptedFile":"C:\\Users\\13013\\AppData\\Roaming\\Code\\clp\\bbca1a7059cee8a1b93da8947fee1c4f.zh-cn\\corrupted.info","_languagePackSupport":true}
 # environment
 PYCHARM COMMUNITY EDITION = C:\Users\13013\AppData\Local\JetBrains\PyCharm Community Edition 2020.1\bin;
 # environment
@@ -71,7 +71,8 @@ VSCODE_CWD = c:\users\13013\appdata\local\programs\microsoft vs code
 # environment
 GOPROXY = https://proxy.golang.org,direct
 # environment
-PATH = C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\VMware\VMware Workstation\bin\;D:\INK;C:\MinGW\bin;C:\WINDOWS\system32;C:\WINDOWS;D:\Software\Xshell\;D:\Software\XFTP\;C:\Users\13013\AppData\Local\Programs\Python\Python38\Lib\site-packages\pyqt5_tools;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Program Files\MySQL\MySQL Server 8.0\bin;C:\Program Files\dotnet\;C:\Program Files (x86)\dotnet\;D:\metasploit-framework\bin\;C:\Windows\System32\WindowsPowerShell\v1.0;C:\Program Files\Git\cmd;C:\Users\13013\AppData\Local\Programs\Python\Python38;C:\Python26;C:\Go\bin;C:\Program Files\Docker\Docker\resources\bin;C:\ProgramData\DockerDesktop\version-bin;C:\Program Files (x86)\CMake\bin;C:\apache-maven-3.8.4\bin;C:\Program Files\OpenVPN\bin;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files (x86)\MuMu\emulator\nemu\vmonitor\bin;D:\Software\Matlab\runtime\win64;D:\Software\Matlab\bin;D:\Software\Matlab\polyspace\bin;C:\Program Files\nodejs\;D:\HackTools\2-web\sqlmap;C:\Library\Developer\Toolchains\unknown-Asserts-development.xctoolchain\usr\bin;C:\Library\Swift-development\bin;C:\Library\icu-69.1\usr\bin;C:\Users\13013\.cargo\bin;C:\Ruby27-x64\bin;C:\Program Files\MySQL\MySQL Shell 8.0\bin\;C:\Users\13013\AppData\Local\Programs\Python\Python38\Scripts\;C:\Users\13013\AppData\Local\Programs\Python\Python38\;C:\Users\13013\AppData\Local\Microsoft\WindowsApps;C:\Users\13013\AppData\Local\JetBrains\PyCharm Community Edition 2020.1\bin;C:\Program Files (x86)\Pandoc;C:\Users\13013\AppData\Local\Microsoft\WindowsApps;C:\Users\13013\.dotnet\tools;C:\Program Files (x86)\Nmap;C:\Program Files\JetBrains\GoLand 2021.1\bin;;C:\Program Files\Azure Data Studio\bin;C:\Program Files\Java\jre1.8.0_121\bin;D:\metasploit-framework\bin;C:\Users\13013\go\bin;C:\Program Files\CMake\bin;C:\Users\13013\AppData\Local\Programs\Microsoft VS Code\bin;C:\Software\apache-tomcat-8.5.77\bin;C:\Users\13013\AppData\Roaming\npm;
+PATH = C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\VMware\VMware Workstation\bin\;D:\INK;C:\MinGW\bin;C:\WINDOWS\system32;C:\WINDOWS;D:\Software\Xshell\;D:\Software\XFTP\;C:\Users\13013\AppData\Local\Programs\Python\Python38\Lib\site-packages\pyqt5_tools;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Program Files\MySQL\MySQL Server 8.0\bin;C:\Program Files\dotnet\;C:\Program Files (x86)\dotnet\;D:\metasploit-framework\bin\;C:\Windows\System32\WindowsPowerShell\v1.0;C:\Program Files\Git\cmd;C:\Users\13013\AppData\Local\Programs\Python\Python38;C:\Python26;C:\Go\bin;C:\Program Files\Docker\Docker\resources\bin;C:\ProgramData\DockerDesktop\version-bin;C:\Program Files (x86)\CMake\bin;C:\apache-maven-3.8.4\bin;C:\Program Files\OpenVPN\bin;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files (x86)\MuMu\emulator\nemu\vmonitor\bin;D:\Software\Matlab\runtime\win64;D:\Software\Matlab\bin;D:\Software\Matlab\polyspace\bin;C:\Program Files\nodejs\;D:\HackTools\2-web\sqlmap;C:\Library\Developer\Toolchains\unknown-Asserts-development.xctoolchain\usr\bin;C:\Library\Swift-development\bin;C:\Library\icu-69.1\usr\bin;C:\Users\13013\.cargo\bin;C:\Ruby27-x64\bin;C:\Program Files\MySQL\MySQL Shell 8.0\bin\;C:\Users\13013\AppData\Local\Programs\Python\Python38\Scripts\;C:\Users\13013\AppData\Local\Programs\Python\Python38\;C:\Users\13013\AppData\Local\Microsoft\WindowsApps;C:\Users\13013\AppData\Local\JetBrains\PyCharm Community Edition 2020.1\bin;C:\Program Files (x86)\Pandoc;C:\Users\13013\AppData\Local\Microsoft\WindowsApps;C:\Users\13013\.dotnet\tools;C:\Program Files (x86)\Nmap;C:\Program Files\JetBrains\GoLand 2021.1\bin;;C:\Program Files\Azure Data Studio\bin;C:\Program Files\Java\jre1.8.0_121\bin;D:\metasploit-framework\bin;C:\Users\13013\go 
+\bin;C:\Program Files\CMake\bin;C:\Users\13013\AppData\Local\Programs\Microsoft VS Code\bin;C:\Software\apache-tomcat-8.5.77\bin;C:\Users\13013\AppData\Roaming\npm;
 # environment
 COMMONPROGRAMW6432 = C:\Program Files\Common Files
 # environment
@@ -101,7 +102,8 @@ LIB = C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSV
 # automatic
 %F = $(notdir $%)
 # environment
-CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_12372_OTNLCQURYGMOMDVD
+CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_12372_OTNLCQURYGMOMD 
+VD
 # environment
 VSCODE_PIPE_LOGGING = true
 # environment
@@ -137,8 +139,7 @@ LOGONSERVER = \\MSI
 VSCODE_HANDLES_UNCAUGHT_ERRORS = true
 # environment
 USERDOMAIN = MSI
-# environ 
-ment
+# environment
 MSMPI_BENCHMARKS = C:\Program Files\Microsoft MPI\Benchmarks\
 # environment
 MAKELEVEL := 0
@@ -155,7 +156,8 @@ MAKE_VERSION := 3.82.90
 # makefile
 .DEFAULT_GOAL := 
 # environment
-INCLUDE = C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\include;C:\Program Files (x86)\Windows Kits\10\Include\10.0.10586.0\ucrt;C:\Program Files (x86)\Windows Kits\10\Lib\10.0.10586.0\ucrt;C:\Program Files (x86)\Windows Kits\10\Lib\10.0.10586.0\um;C:\Program Files (x86)\Windows Kits\10\Lib\10.0.10586.0\ucrt_enclave;$(WindowsSDK_IncludePath);
+INCLUDE = C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\include;C:\Program Files (x86 
+)\Windows Kits\10\Include\10.0.10586.0\ucrt;C:\Program Files (x86)\Windows Kits\10\Lib\10.0.10586.0\ucrt;C:\Program Files (x86)\Windows Kits\10\Lib\10.0.10586.0\um;C:\Program Files (x86)\Windows Kits\10\Lib\10.0.10586.0\ucrt_enclave;$(WindowsSDK_IncludePath);
 # environment
 PROGRAMFILES(X86) = C:\Program Files (x86)
 # automatic
@@ -270,8 +272,7 @@ am Files/Java/jre1.8.0_121/bin, mtime 1652181315): 90 files, no impossibilities.
 oration/NVIDIA NvDLISR, mtime 1553240001): 5 files, no impossibilities.
 # C:\Program Files\MySQL\MySQL Server 8.0\bin (key C:/Program Files/MySQL/MySQL Server 8.0/bin, mtime 1588340680): 45 files, no impossibilities.
 # C:\Users\13013\AppData\Local\Programs\Python\Python38\Lib\site-packages\pyqt5_tools (key C:/Users/13013/AppData/Local/Programs/Python/Python38/Lib/site-packages/pyqt5_tools, mtime 1595332306): 11 files, no impossibilities.
-# D:\metasploit-framework\bin (key D:/metasploit-framework/bin, mtime  
-1631498467): 23 files, no impossibilities.
+# D:\metasploit-framework\bin (key D:/metasploit-framework/bin, mtime 1631498467): 23 files, no impossibilities.
 # . (key d:/Github/ADT, mtime 1655791921): 13 files, no impossibilities.
 # C:\Users\13013\AppData\Local\Microsoft\WindowsApps (key C:/Users/13013/AppData/Local/Microsoft/WindowsApps, mtime 1655772868): 25 files, no impossibilities.
 # C:\Program Files\MySQL\MySQL Shell 8.0\bin\ (key C:/Program Files/MySQL/MySQL Shell 8.0/bin/, mtime 1588340816): 7 files, no impossibilities.
@@ -281,7 +282,8 @@ les, no impossibilities.
 # D:\INK (key D:/INK, mtime 1655278100): 83 files, no impossibilities.
 # C:\Program Files\Git\cmd (key C:/Program Files/Git/cmd, mtime 1632231419): 8 files, no impossibilities.
 # C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common (key C:/Program Files (x86)/NVIDIA Corporation/PhysX/Common, mtime 1640869240): 12 files, no impossibilities.
-# C:\Program Files\JetBrains\GoLand 2021.1\bin (key C:/Program Files/JetBrains/GoLand 2021.1/bin, mtime 1618889814): 31 files, no impossibilities.
+# C:\Program Files\JetBrains 
+\GoLand 2021.1\bin (key C:/Program Files/JetBrains/GoLand 2021.1/bin, mtime 1618889814): 31 files, no impossibilities.
 # C:\Python26: could not be stat'd.
 # C:\MinGW\bin (key C:/MinGW/bin, mtime 1591327694): 148 files, no impossibilities.
 # C:\Users\13013\AppData\Local\Programs\Microsoft VS Code\bin (key C:/Users/13013/AppData/Local/Programs/Microsoft VS Code/bin, mtime 1655369474): 4 files, no impossibilities.
@@ -346,8 +348,7 @@ all:
 .SUFFIXES:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
-#  File has not been up 
-dated.
+#  File has not been updated.
 
 # Not a target:
 Makefile:
@@ -390,10 +391,11 @@ xist.
 # other used: total = 61433 B / count = 4318 / avg = 14 B
 # other free: total = 61 B / max = 12 B / min = 4 B / avg = 7 B
 
-# strcache performance: lookups = 4859 / hit rate = 5%
+# strcache per 
+formance: lookups = 4859 / hit rate = 5%
 # hash-table stats:
 # Load=4594/8192=56%, Rehash=0, Collisions=2476/4859=51%
-# Finished Make data base on Wed Jun 22 17:14:41 2022
+# Finished Make data base on Wed Jun 22 19:47:33 2022
 
  
 make.exe: *** No rule to make target 'all'.  Stop.

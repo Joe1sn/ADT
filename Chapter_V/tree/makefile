@@ -4,7 +4,7 @@ CFLAGS:= -std=c11
 INCLUDE:=-I ../../include
 
 .PHONY: bt_test
-bt_test: $(SRC)/bt_test.c $(SRC)/bin_tree.c
+bt_test: $(SRC)/bt_test.c $(SRC)/bin_tree.c $(SRC)/queue.c 
 	gcc $(DEBUG) $(INCLUDE) $(CFLAGS) $^ -o $@
 
 .PHONY: clean

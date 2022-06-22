@@ -176,7 +176,7 @@ void make_tree(bin_tree *bt, element_type e, bin_tree *ln, bin_tree *rn){
 `postOrder_tree(bt)`: 后序遍历二叉树bt。
 `levelorder_tree(bt)`: 层次遍历二叉树bt。
 
-### 递归遍历
+## 递归遍历
 
 既然每个子节点都是一个树，那为什么不用递归去遍历呢？
 
@@ -198,7 +198,7 @@ void make_tree(bin_tree *bt, element_type e, bin_tree *ln, bin_tree *rn){
 
 尝试用递归的思想理解
 
-#### 先序遍历
+### 先序遍历
 
 `preorder_tree(bt)`: 先序遍历二叉树bt。
 
@@ -216,7 +216,7 @@ void preorder(bt_node *bn){
 }
 ```
 
-#### 中序遍历
+### 中序遍历
 
 `inorder_tree(bt)`: 中序遍历二叉树bt。
 
@@ -246,7 +246,7 @@ void inorder(bt_node *bn){
 }
 ```
 
-#### 后序遍历
+### 后序遍历
 
 `postOrder_tree(bt)`: 后序遍历二叉树bt。
 
@@ -264,7 +264,7 @@ void inorder(bt_node *bn){
 }
 ```
 
-#### 小测试
+### 小测试
 
 注意：我们还没有写回收函数，只能让程序退出时操作系统回收内存，但是这里仅仅只验证遍历算法是否正确
 
@@ -333,7 +333,44 @@ void inorder(bt_node *bn){
 
    发现没有问题
 
+## 层次遍历
+
+每次从左到右访问该二叉树的元素，上面的例子使用层次遍历的话就为:`BDCEF`
+
+1. 若二叉树为空，退出；初始化队列Q，根节点入队
+2. 队列不为空：
+   1. 获取队列头中的节点`p`，将头元素出队
+   2. 访问节点`p`中元素
+   3. 若左节点存在，左节点进队
+   4. 若右节点存在，右节点进队
+3. 退出
+
 `levelorder_tree(bt)`: 层次遍历二叉树bt。
+
+```c
+void level_order_tree(bin_tree *bt){
+    if (!bt->root)
+        return;
+    queue q;
+    create_q(&q,100);
+    bt_node *bn;
+    en_queue(&q, bt->root);
+
+    while(!is_q_empty(&q))
+    {
+        
+        front(&q,bn);
+        de_queue(&q);
+        int i;
+        printf("%c ",bn->element);
+        if(bn->l_child)
+            en_queue(&q,bn->l_child);
+        if(bn->r_child)
+            en_queue(&q,bn->r_child);
+    }
+    destroy(&q);
+}
+```
 
 # 树和森林
 

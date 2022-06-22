@@ -1,6 +1,7 @@
 #include "tree.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include "queue.h"
 
 void create(bin_tree * bt){
     bt->root = NULL;
@@ -71,4 +72,27 @@ void postorder(bt_node *bn){
     postorder(bn->r_child);
     printf("%c ",bn->element);
     
+}
+
+void level_order_tree(bin_tree *bt){
+    if (!bt->root)
+        return;
+    queue q;
+    create_q(&q,100);
+    bt_node *bn;
+    en_queue(&q, bt->root);
+
+    while(!is_q_empty(&q))
+    {
+        
+        front(&q,bn);
+        de_queue(&q);
+        int i;
+        printf("%c ",bn->element);
+        if(bn->l_child)
+            en_queue(&q,bn->l_child);
+        if(bn->r_child)
+            en_queue(&q,bn->r_child);
+    }
+    destroy(&q);
 }

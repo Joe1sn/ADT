@@ -33,4 +33,6 @@ void inorder(bt_node *bn);
 void postorder_tree(bin_tree *bt);
 void postorder(bt_node *bn);
 
+void level_order_tree(bin_tree *bt);
+
 #endif

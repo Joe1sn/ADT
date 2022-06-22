@@ -1,12 +1,13 @@
 #include "queue.h"
+#include "tree.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
-void create(queue *q, int max_size){
+void create_q(queue *q, int max_size){
     q->max_size = max_size;
-    q->element = (element_type *)malloc(max_size*sizeof(element_type));
-    memset(q->element,0,q->max_size*sizeof(element_type));
+    q->element = (bt_node *)malloc(max_size*sizeof(bt_node));
+    memset(q->element,0,q->max_size*sizeof(bt_node));
     q->front = q->rear = 0;
 }
 
@@ -16,31 +17,31 @@ void destroy(queue *q){
     q->front=q->rear=-1;
 }
 
-status is_empty(queue *q){
+status is_q_empty(queue *q){
     return q->front == q->rear;
 }
 
-status is_full(queue *q){
+status is_q_full(queue *q){
     return (q->rear+1)%q->max_size==q->front;
 }
 
-status front(queue *q, element_type *x){
-    if(is_empty(q))
+status front(queue *q, bt_node *x){
+    if(is_q_empty(q))
         return ERROR;
     *x = q->element[(q->front+1)%(q->max_size)];
     return OK;
 }
 
-status en_queue(queue *q, element_type x){
-    if(is_full(q))
+status en_queue(queue *q, bt_node *x){
+    if(is_q_full(q))
         return ERROR;
     q->rear=(q->rear+1)%q->max_size; //moving rear
-    q->element[q->rear] = x;
+    q->element[q->rear] = *x;
     return OK;
 }
 
 status de_queue(queue *q){
-    if(is_empty(q))
+    if(is_q_empty(q))
         return ERROR;
     q->front=(q->front+1)%q->max_size;
     return OK;
