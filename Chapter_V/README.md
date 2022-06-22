@@ -7,7 +7,7 @@ TO DO
 
 > This chapter contains lots of definations and very complex concepts
 >
-> So this is in Chinese(my native laguage), there will be english version few months later
+> So this README file is in Chinese(my native laguage), there will be english version few months later
 
 # 树
 
