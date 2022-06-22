@@ -28,7 +28,15 @@ int main()
 
     printf("\nlevel order tree: ");
     level_order_tree(&z);
-    printf("\n");
+
+    
+    printf("\ntree size: %d",tree_size(&z));
+    printf("\nnow is clear tree");
+    tree_clear(&z);
+    printf("\ntree size: %d\n",tree_size(&z));
+
+    pre_make(&z);
+    printf("\ntree size: %d\n",tree_size(&z));
 
     return 0;
 }

@@ -1,3 +1,8 @@
+TO DO
+
+- [ ] 非递归遍历代码
+- [ ] 线索二叉树概念与图片
+
 # 数和二叉树
 
 > This chapter contains lots of definations and very complex concepts
@@ -333,7 +338,7 @@ void inorder(bt_node *bn){
 
    发现没有问题
 
-## 层次遍历
+### 层次遍历
 
 每次从左到右访问该二叉树的元素，上面的例子使用层次遍历的话就为:`BDCEF`
 
@@ -371,6 +376,110 @@ void level_order_tree(bin_tree *bt){
     destroy(&q);
 }
 ```
+
+## 遍历的应用
+
+### 计算二叉树节点的个数
+
+使用任意一种方式，存在则总数+1，也可递归使用`size(bin_tree)`函数
+
+```c
+int tree_size(bin_tree *bt){
+    return size(bt->root);
+}
+int size(bt_node *bn){
+    if (!bn)
+        return 0;
+    return size(bn->l_child)+size(bn->r_child)+1;
+}
+```
+
+### 清空二叉树
+
+```c
+void tree_clear(bin_tree *bt){
+    tclear(bt->root);
+    bt->root=NULL;
+}
+
+void tclear(bt_node *bn){
+    if(!bn)
+        return;
+    tclear(bn->l_child);
+    tclear(bn->r_child);
+    free(bn);
+}
+```
+
+### 先序构建二叉树
+
+之前的二叉树
+
+![](../imgs/5-tree2.jpg)
+
+先序遍历的顺序是：**B D C E F**。那么如何反向构建一颗二叉树？
+
+为了区别叶子节点，叶子结点的两个子节点均为NULL，使用`#`表示，那么上面的顺序就为`BD##CE##F##`
+![](../imgs/5-tree3.jpg)
+
+```c
+bt_node *pre_create(bt_node *bn){
+    char ch;
+    ch=getchar();
+    if(ch=='#')
+        bn=NULL; //create null node
+    else
+    {
+        bn = (bt_node*)malloc(sizeof(bt_node));
+        bn->element = ch;
+        bn->l_child=pre_create(bn->l_child);
+        bn->r_child=pre_create(bn->r_child);
+    }
+    printf("pre_creating\n");
+    return bn;
+}
+void pre_make(bin_tree *bt){
+    bt->root=pre_create(bt->root);
+    printf("pre_make\n");
+}
+```
+
+使用递归同样可以做到交换左右子树、求二叉树高度等
+
+## 非递归遍历
+
+递归其实是一种非常浪费空间的方法，递归深度过高会导致内存耗尽。所以一般希望使用它的迭代版本
+
+二叉树作为一种非线性结构，在进行递归访问的时候我们利用程序的栈来实现对另外一侧节点的访问。如果我们想要线性地、能迭代的访问二叉树就不洗自己实现这种功能，这种保存的信息叫做“线索”，这样就可以定义一颗线索二叉树了。
+
+不过这里不用线索二叉树，而是使用三个函数实现：
+
+- `bin_tree *getfirst(bin_tree *Wbt,stack *s)`
+
+  负责返回二叉树中第一个被访问到的节点
+
+- `bin_tree *getnext(bin_tree *cur_bt,stack *s)`
+
+  负责当前访问次序下，当前节点的后继节点
+
+- `void traverse(bin_tree *bt)`
+
+  利用循环变量非递归访问二叉树每个节点，且每个节点只访问一次
+
+很明显为了保存这些信息我们需要一个堆栈`s`保存待访问的节点
+
+以中序遍历为例
+
+1. 使用`getfirst`函数得到最左后裔节点，并将其设为当前节点
+2. 当前节点存在，访问当前节点；然后使用`getnext`获得中序遍历下的后继节点并作为新的当前待访问节点
+
+栈`s`负责将从根节点到最左后裔节点依次压入栈中
+
+**因为项目下载过于冗余了，代码在此暂时省略**
+
+## 线索二叉树
+
+
 
 # 树和森林
 

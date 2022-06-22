@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "queue.h"
+#include "stack.h"
 
 void create(bin_tree * bt){
     bt->root = NULL;
@@ -96,3 +97,58 @@ void level_order_tree(bin_tree *bt){
     }
     destroy(&q);
 }
+
+int tree_size(bin_tree *bt){
+
+    return size(bt->root);
+}
+int size(bt_node *bn){
+    if (!bn)
+        return 0;
+    return size(bn->l_child)+size(bn->r_child)+1;
+}
+
+void tree_clear(bin_tree *bt){
+    tclear(bt->root);
+    bt->root=NULL;
+}
+
+void tclear(bt_node *bn){
+    if(!bn)
+        return;
+    tclear(bn->l_child);
+    tclear(bn->r_child);
+    free(bn);
+}
+
+bt_node *pre_create(bt_node *bn){
+    char ch;
+    ch=getchar();
+    if(ch=='#')
+        bn=NULL; //create null node
+    else
+    {
+        bn = (bt_node*)malloc(sizeof(bt_node));
+        bn->element = ch;
+        bn->l_child=pre_create(bn->l_child);
+        bn->r_child=pre_create(bn->r_child);
+    }
+    printf("pre_creating\n");
+    return bn;
+}
+void pre_make(bin_tree *bt){
+    bt->root=pre_create(bt->root);
+    printf("pre_make\n");
+}
+
+bt_node *getfirst(bin_tree *bt, stack *s){
+    bt_node *p = bt->root;
+    if(!p)
+        return NULL;
+    while(p->l_child != NULL)
+    {
+        push(s,p);
+    }
+}
+bt_node *next(bin_tree *bt, stack *s);
+void traverse(bin_tree *bt);
