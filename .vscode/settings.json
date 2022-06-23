@@ -1,6 +1,13 @@
 {
     "files.associations": {
         "stack.h": "c",
-        "stdlib.h": "c"
+        "stdlib.h": "c",
+        "types.h": "c",
+        "seq_list.h": "c",
+        "stdio.h": "c",
+        "link_list.h": "c",
+        "string.h": "c",
+        "postfix_calc.h": "c",
+        "array.h": "c"
     }
 }
