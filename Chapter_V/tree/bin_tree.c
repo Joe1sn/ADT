@@ -1,14 +1,13 @@
 #include "tree.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include "queue.h"
 #include "stack.h"
 
 void create(bin_tree * bt){
     bt->root = NULL;
 }
 
-bt_node *new_node(element_type x, bt_node *ln, bt_node *rn){
+bt_node *new_node(t_element_type x, bt_node *ln, bt_node *rn){
     bt_node *p = (bt_node *)malloc(sizeof(bt_node));
     p->element = x;
     p->l_child = ln;
@@ -22,7 +21,7 @@ BOOL is_empty(bin_tree *bt){
     return false;
 }
 
-BOOL root(bin_tree *bt, element_type *x){
+BOOL root(bin_tree *bt, t_element_type *x){
     if (bt->root)
     {
         *x = bt->root->element;
@@ -31,7 +30,7 @@ BOOL root(bin_tree *bt, element_type *x){
     return false;
 }
 
-void make_tree(bin_tree *bt, element_type e, bin_tree *ln, bin_tree *rn){
+void make_tree(bin_tree *bt, t_element_type e, bin_tree *ln, bin_tree *rn){
     if(bt->root || ln == rn)
         return;
     bt->root = new_node(e, ln->root, rn->root);
@@ -147,8 +146,43 @@ bt_node *getfirst(bin_tree *bt, stack *s){
         return NULL;
     while(p->l_child != NULL)
     {
-        push(s,p);
+        push(s,*p);
     }
 }
-bt_node *next(bin_tree *bt, stack *s);
-void traverse(bin_tree *bt);
+bt_node *getnext(bt_node *cur, stack *s){
+    bt_node *p;
+    if(cur->r_child != NULL)
+    {
+        p = cur->r_child;
+        while(p->l_child!=NULL)
+        {
+            push(s,*p);
+            p=p->l_child;
+        }
+        cur=p;
+    }
+    else if(stack_is_empty(s))
+    {
+        top(s, cur);
+        pop(s);
+    }
+    else
+    {
+        cur=NULL;
+        return ERROR;
+    }
+    return cur;
+}
+
+void traverse(bin_tree *bt)
+{
+    stack s;
+    bt_node *cur;
+    stack_create(&s,0x100);
+    cur = getfirst(bt,&s);
+    while(cur)
+    {
+        printf("%c",cur->element);
+        cur = getnext(cur,&s);
+    }
+}

@@ -1,13 +1,17 @@
 #ifndef TREE_H
 #define TREE_H
 #include <ADT/types.h>
+#include "stack.h"
+#include "queue.h"
 
 /*******Binart Tree
  * This paragraph is for binary tree 
 *******/
+typedef char t_element_type;
+
 typedef struct bt_node
 {
-    element_type element;
+    t_element_type element;
     struct bt_node *l_child;
     struct bt_node *r_child;
     
@@ -19,10 +23,10 @@ typedef struct bin_tree
 }bin_tree;
 
 void create(bin_tree * bt);
-bt_node *new_node(element_type x, bt_node *ln, bt_node *rn);
+bt_node *new_node(t_element_type x, bt_node *ln, bt_node *rn);
 BOOL is_empty(bin_tree *bt);
-BOOL root(bin_tree *bt, element_type *x);
-void make_tree(bin_tree *bt, element_type e, bin_tree *ln, bin_tree *rn);
+BOOL root(bin_tree *bt, t_element_type *x);
+void make_tree(bin_tree *bt, t_element_type e, bin_tree *ln, bin_tree *rn);
 
 //---------traverse binary tree
 //-VLR
@@ -46,8 +50,9 @@ void tclear(bt_node *bn);
 bt_node *pre_create(bt_node *t);
 void pre_make(bin_tree *bt);
 
+//!!!CODE CANNOT RUN!!!
 bt_node *getfirst(bin_tree *bt, stack *s);
-bt_node *next(bin_tree *bt, stack *s);
+bt_node *getnext(bin_tree *bt, stack *s);
 void traverse(bin_tree *bt);
 
 

@@ -452,38 +452,119 @@ void pre_make(bin_tree *bt){
 
 二叉树作为一种非线性结构，在进行递归访问的时候我们利用程序的栈来实现对另外一侧节点的访问。如果我们想要线性地、能迭代的访问二叉树就不洗自己实现这种功能，这种保存的信息叫做“线索”，这样就可以定义一颗线索二叉树了。
 
-不过这里不用线索二叉树，而是使用三个函数实现：
-
-- `bin_tree *getfirst(bin_tree *Wbt,stack *s)`
-
-  负责返回二叉树中第一个被访问到的节点
-
-- `bin_tree *getnext(bin_tree *cur_bt,stack *s)`
-
-  负责当前访问次序下，当前节点的后继节点
-
-- `void traverse(bin_tree *bt)`
-
-  利用循环变量非递归访问二叉树每个节点，且每个节点只访问一次
+不过这里不用线索二叉树，大致讲下思路
 
 很明显为了保存这些信息我们需要一个堆栈`s`保存待访问的节点
 
-以中序遍历为例
+对该二叉树
 
-1. 使用`getfirst`函数得到最左后裔节点，并将其设为当前节点
-2. 当前节点存在，访问当前节点；然后使用`getnext`获得中序遍历下的后继节点并作为新的当前待访问节点
+![](../imgs/5-tree4.jpg)
 
-栈`s`负责将从根节点到最左后裔节点依次压入栈中
+- 先序遍历(VLR)
 
-**因为项目下载过于冗余了，代码在此暂时省略**
+  ```fake_python
+  s=stack()
+  p=root
+  s.push(p)
+  while(p!=NULL or !is_empty(s)):
+  	print(s.top->value)
+  	s.pop()
+  	if p->rchild:
+  		s.push(p->rchild)
+  	elif ->lchild:
+  		s.push(p->lchild)
+  ```
+
+- 中序遍历(LVR)
+
+  ```fake_python
+  s=stack()
+  p=root
+  s.push(p)
+  p=p->left
+  while(p!=NULL or !is_empty(s)):
+  	while(p):
+  		s.push(p) #此处可以让右节点入栈
+  		p=p->lchild
+  	print(s.top()->value)
+  	p=s.top()
+  	s.pop()
+  	p=p->rchild
+  ```
+
+  回溯的时候右节点入栈
+
+- 后序遍历(LRV)
+
+  ```fake_python
+  s=stack()
+  p=root
+  while(p!=NULL or !is_empty(s)):
+  	while(p):
+  		s.push(p)
+  		if(p->lchild): p = p->lchild
+  		elif(p->rchild): p = p->rchild
+  	print(s.top())
+  	p = s.top()
+      s.pop()
+  	if s and s.top()->lchild == p:
+  		p = p->rchild
+  	else:
+  		p = NULL  
+  ```
+
+  若为左节点，则右节点入栈
+
+  若为右节点，返回上一层
 
 ## 线索二叉树
 
+### 构建
 
+叶子结点的指针空余带来的是很多没有被利用的空间
+
+![](../imgs/5-tree5.jpg)
+
+- **Ltag**
+  - **0**: `lchild`指向左节点
+  - **1**: `lchild`指向该节点的遍历前驱
+
+- **Rtag**
+  - **0**: `rchild`指向左节点
+  - **1**: `rchild`指向该节点的遍历后继
+
+最后就可以按照遍历方式得到一个链表，依次访问该链表就是该遍历方式的遍历顺序
+
+![](D:\Pictures\typora\5-tree4.jpg)
+
+上图的中序遍历就是：CBDAEGF
+
+对应的中序穿线树为
+
+![](../imgs/5-tree7.jpg)
+
+### 遍历（中序）
+
+使用python伪代码
+
+```fake_python
+//中序遍历
+p=root
+while p->lchild:
+	p = p->lchild
+while p:
+	print(p)
+	if(p->rtag==0 and p->rchild): #不是线索
+		p = p->rchild
+        while(p->lchild):
+            p = p->lchild
+	else: p = p->rchild
+```
+
+跟着步骤得到遍历顺序: CBDAEGF
 
 # 树和森林
 
 # 堆和优先权队列
 
 # 哈夫曼树和哈夫曼编码
-

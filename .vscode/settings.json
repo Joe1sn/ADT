@@ -8,6 +8,9 @@
         "link_list.h": "c",
         "string.h": "c",
         "postfix_calc.h": "c",
-        "array.h": "c"
-    }
+        "array.h": "c",
+        "tree.h": "c",
+        "traverse.h": "c"
+    },
+    "C_Cpp.errorSquiggles": "Disabled"
 }
