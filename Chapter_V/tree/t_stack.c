@@ -45,7 +45,7 @@ status push(stack *s, element_type x){
 status pop(stack *s){
     if(stack_is_empty(s))
         return ERROR;
-    s->element[s->top] = (element_type)0;
+    // s->element[s->top] = (void *)0;
     s->top--;
     return OK;
 }

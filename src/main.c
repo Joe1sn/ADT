@@ -1,22 +1,44 @@
-#include <ADT/seq_list.h>
+#include <ADT/tree.h>
 #include <stdio.h>
 #include <stdlib.h>
 
 int main()
 {
-    printf("start\n");
-    seq_list *list = malloc(sizeof(seq_list));
-    slist_init(list, 10);
-    for (size_t i = 0; i < 10; i++)
-        slist_insert(list,i-1,i+1);
-    slist_output(list);
+    bin_tree a,b,x,y,z;
+    create(&a);
+    create(&b);
+    create(&x);
+    create(&y);
+    create(&z);
 
-    slist_delete(list,0);
-    slist_output(list);
+    make_tree(&y,'E',&a,&b);
+    make_tree(&z,'F',&a,&b);
+    make_tree(&x,'C',&y,&z);
+    make_tree(&y,'D',&a,&b);
+    make_tree(&z,'B',&y,&x);
 
-    slist_update(list,5,10);
-    slist_output(list);
+    printf("preorder: ");
+    preorder_tree(&z);
 
-    slist_destroy(list);
-    slist_output(list);    
+    printf("\ninorder: ");
+    inorder_tree(&z);
+
+    printf("\npostorder: ");
+    postorder_tree(&z);
+
+    printf("\nlevel order tree: ");
+    level_order_tree(&z);
+
+    
+    printf("\ntree size: %d",tree_size(&z));
+    // printf("\nnow is clear tree");
+    // tree_clear(&z);
+    // printf("\ntree size: %d\n",tree_size(&z));
+
+    // pre_make(&z);
+    // printf("\ntree size: %d\n",tree_size(&z));
+    printf("\nnow traverse in inorder: ");
+    traverse(&z);
+    printf("\n");
+    return 0;
 }

@@ -1,8 +1,8 @@
-#include "tree.h"
+#include <ADT/tree.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include "queue.h"
-#include "stack.h"
+#include <ADT/t_queue.h>
+#include <ADT/t_stack.h>
 
 void create(bin_tree * bt){
     bt->root = NULL;

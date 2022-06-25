@@ -4,7 +4,6 @@
 #include "tree.h"
 
 typedef bt_node element_type;
-
 typedef struct stack
 {
     int top;

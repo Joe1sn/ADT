@@ -11,11 +11,13 @@ $(BUILD)\main.exe: \
 	$(SRC)/main.c \
 	$(SRC)/algorithm/seq_list.c \
 	$(SRC)/algorithm/link_list.c \
-	$(SRC)/algorithm/queue.c \
 	$(SRC)/algorithm/postfix_calc.c \
-	$(SRC)/algorithm/stack.c \
+	$(SRC)/algorithm/t_stack.c \
+	$(SRC)/algorithm/t_queue.c \
 	$(SRC)/algorithm/array.c \
-	$(SRC)/algorithm/my_str.c
+	$(SRC)/algorithm/my_str.c \
+	$(SRC)/algorithm/bin_tree.c
+
 	gcc $(DEBUG) $(INCLUDE) $(CFLAGS) $^ -o $@
 
 .PHONY: run
