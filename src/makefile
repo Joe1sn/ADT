@@ -1,7 +1,7 @@
 BUILD:=..\build
 SRC:=.
 DEBUG:= -g
-CFLAGS:= -std=c99
+CFLAGS:= -std=c11
 INCLUDE:=-I .\include
 
 $(BUILD)/%.o: $(SRC)/%.c
@@ -16,7 +16,8 @@ $(BUILD)\main.exe: \
 	$(SRC)/algorithm/t_queue.c \
 	$(SRC)/algorithm/array.c \
 	$(SRC)/algorithm/my_str.c \
-	$(SRC)/algorithm/bin_tree.c
+	$(SRC)/algorithm/bin_tree.c \
+	$(SRC)/algorithm/priority_queue.c
 
 	gcc $(DEBUG) $(INCLUDE) $(CFLAGS) $^ -o $@
 

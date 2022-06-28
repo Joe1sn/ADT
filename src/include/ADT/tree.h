@@ -53,5 +53,4 @@ bt_node *getfirst(bin_tree *bt,void *s);
 bt_node *getnext(bt_node *bt,void *s);
 void traverse(bin_tree *bt);
 
-
 #endif

@@ -681,5 +681,216 @@ while(p):
 
 # 堆和优先权队列
 
+​	有一种数据结构，元素加入的次序无所谓，但是元素之前有取出的优先权，每次出去都是优先权最高的元素。
+​	很容易想到队列，因为如果入队时间越早，优先权越高，优先权自然越高，而出队也最方便
+
+​	问题就是使用队列每次插入新的值会执行线性搜索，会增加复杂度
+
+## 关于堆
+
+就是一颗**完全二叉树**，根节点叫做堆顶，由子节点和父节点的关系分为
+
+- **最小堆**：父节点小于或等于子节点
+- **最小堆**：父节点大于或等于子节点，父节点存储最大值
+
+## 建堆运算
+
+以建立最小堆位例子，比如有
+
+![](../imgs/5-tree11.jpg)
+
+上面的序列就是一个很好的输入序列，但是我们输入是无序的，所以需要调整位置
+
+虽然逻辑结构上是树，但是存储上是线性表存储，也就是说我们可以通过数组下表计算的方式调整堆
+
+最小堆这里有特性：$lchild \ge rchild \ge root$
+那么只需要从上往下，从左子树开始比较后，然后置换对应的节点，最后扫描的为叶子节点就算调整完毕 **注意，这里是完全二叉树，计算下标很简单**
+
+```c
+void adjust_down(element_type heap[], int cur, int boder){
+    int p = cur;
+    int min_child;
+    element_type tmp;
+
+    while(2*p+1 <= boder){
+        if ((2*p+2 <= boder) && (heap[2*p+1]>heap[2*p+2]))
+            min_child = 2*p+2;
+        else
+            min_child = 2*p+1;
+        if(heap[p]<=heap[min_child])
+            break;
+        else{
+            tmp = heap[p];
+            heap[p]=heap[min_child];
+            heap[min_child]=tmp;
+            /* If it's int type*/
+            //heap[p]=heap[min_child]^0x10
+            //heap[min_child]=heap[p]^0x10
+            p=min_child;
+        }
+    }
+}
+```
+
+那么为了在建立堆的时候
+
+```c
+void create_heap(element_type heap[], int n){
+    int i;
+    for(i=(n-2)/2; i>=0; i--)
+        adjust_down(heap,i,n-1);
+}
+```
+
+## 优先权队列
+
+**这里依然以最小堆位例子**
+
+### ADT
+
+- **data**
+
+  $n \ge 0$的最小堆
+
+- **algorithm**
+
+  `prior_create(pq, max_size)`: create a empty prirorityQueue
+
+  `priro_destroy(pq)`: realese memroy space
+
+  `priro_is_empty(pq)`:
+
+  `priro_is_full(pq)`:
+
+  `priro_size(pq)`: get the element number
+
+  `priro_append(pq,x)`: add new element `x` into prirority queue `pq`
+
+  `priro_serve(pq,x)`: set `x` to the highest prirority element in `pq`
+
+和队列差不多的结构体
+
+```c
+typedef char t_element_type;
+struct priro_q
+{
+    t_element_type *pq;
+    int n;
+    int max_size;
+}priro_q;
+```
+
+### 向上调整算法
+
+​	由于每次添加元素到队列，都是添加到堆底，如果下一个出现元素打破队列，就需要调整下标了
+​	根据堆的特性，出现这种情况就是当先优先级小于父节点，那么循环比较直到根节点就可以了
+
+```c
+/**
+ *          heap[(p-1)/2]                heap[(p-1)/2]
+ *      heap[p]   heap[p+1]   or  heap[p-1]      heap[p]
+ */
+void adjust_up(element_type heap[], int cur){
+    int p =cur;
+    element_type tmp;
+    while(p>0){
+        if(heap[p]<heap[(p-1)/2]){
+            tmp = heap[p];
+            heap[p]=heap[(p-1)/2];
+            heap[(p-1)/2]=tmp;
+            /* or t_elemtn_type is int*/
+            // heap[(p-1)/2]=heap[p]^0x10
+            // heap[p]=heap[(p-1)/2]^0x10
+            p=(p-1)/2;
+        }
+        else
+            break;
+    }
+}
+```
+
+### prior_create
+
+`prior_create(pq, max_size)`create a empty prirorityQueue
+
+```c
+void prior_q_create(prior_q *pq,int max_size){
+    pq->max_size = max_size;
+    pq->n = 0;
+    pq->q = (element_type *)malloc(max_size*sizeof(element_type));
+    memset(pq->q,0,pq->max_size*sizeof(element_type));
+}
+```
+
+### priro_destroy
+
+`priro_destroy(pq)`: realese memroy space
+
+```c
+void prior_q_destroy(prior_q *pq){
+    free(pq->q);
+    pq->n=0;
+    pq->max_size=0;
+}
+```
+
+### priro_append
+
+`priro_append(pq,x)`: add new element `x` into prirority queue `pq`
+
+```c
+void prior_q_append(prior_q *pq, element_type x){
+    if( prior_q_is_full(pq) ) return;
+    pq->q[pq->n]=x;
+    pq->n++;
+    adjust_up(pq->q, pq->n-1);
+}
+```
+
+### priro_serve
+
+`priro_serve(pq,x)`: set `x` to the highest prirority element in `pq`
+
+```c
+void priro_q_serve(prior_q *pq, element_type *x){
+    if(prior_q_is_empty(pq)) return;
+    *x = pq->q[0];
+    pq->n--;
+    pq->q[0]=pq->q[pq->n];
+    adjust_down(pq->q, 0, pq->n-1);
+}
+```
+
+### main
+
+```c
+#include <ADT/priority_queue.h>
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+    prior_q *pq=malloc(sizeof(prior_q));
+    prior_q_create(pq,10);
+    int test_case[]={71,74,2,72,54,93,52,28,'\0'};
+    int i;
+    
+    for (i = 0; test_case[i]; i++)
+        prior_q_append(pq, test_case[i]);
+    while(pq->n>0){
+        element_type x;
+        priro_q_serve(pq,&x);
+        printf("%d ",x);
+    }
+    return 0;
+}
+```
+
+output
+
+```
+2 28 52 54 71 72 74 93 
+```
+
 # 哈夫曼树和哈夫曼编码
 

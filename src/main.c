@@ -1,44 +1,20 @@
-#include <ADT/tree.h>
+#include <ADT/priority_queue.h>
 #include <stdio.h>
 #include <stdlib.h>
 
 int main()
 {
-    bin_tree a,b,x,y,z;
-    create(&a);
-    create(&b);
-    create(&x);
-    create(&y);
-    create(&z);
-
-    make_tree(&y,'E',&a,&b);
-    make_tree(&z,'F',&a,&b);
-    make_tree(&x,'C',&y,&z);
-    make_tree(&y,'D',&a,&b);
-    make_tree(&z,'B',&y,&x);
-
-    printf("preorder: ");
-    preorder_tree(&z);
-
-    printf("\ninorder: ");
-    inorder_tree(&z);
-
-    printf("\npostorder: ");
-    postorder_tree(&z);
-
-    printf("\nlevel order tree: ");
-    level_order_tree(&z);
-
+    prior_q *pq=malloc(sizeof(prior_q));
+    prior_q_create(pq,10);
+    int test_case[]={71,74,2,72,54,93,52,28,'\0'};
+    int i;
     
-    printf("\ntree size: %d",tree_size(&z));
-    // printf("\nnow is clear tree");
-    // tree_clear(&z);
-    // printf("\ntree size: %d\n",tree_size(&z));
-
-    // pre_make(&z);
-    // printf("\ntree size: %d\n",tree_size(&z));
-    printf("\nnow traverse in inorder: ");
-    traverse(&z);
-    printf("\n");
+    for (i = 0; test_case[i]; i++)
+        prior_q_append(pq, test_case[i]);
+    while(pq->n>0){
+        element_type x;
+        priro_q_serve(pq,&x);
+        printf("%d ",x);
+    }
     return 0;
 }
