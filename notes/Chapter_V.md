@@ -619,7 +619,7 @@ while(p):
 
 基本就是逆转
 
-1. 对 **P** 左节点的右节点存在，即`P->lchild->rchild!=NULL`，则 **P** 和`P->lchild->rchild`相连，也和`P->lchild->rchild->rchild->...`相连
+1. 对 **P** 左节点的右节点存oi在，即`P->lchild->rchild!=NULL`，则 **P** 和`P->lchild->rchild`相连，也和`P->lchild->rchild->rchild->...`相连
 2. 删除原有二叉树中的右节点关系
 3. 得到森林
 
@@ -962,38 +962,4 @@ output
 0:A | 10:B | 0:A | 110:C | 0:A | 10:B | 111:D | 0:A
 
 这样就还原了内容`ABACABDA`
-
- 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
