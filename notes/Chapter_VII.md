@@ -1,6 +1,6 @@
 # Binary Search Tree
 
-## definition
+## definitions
 
 **1.properties**
 
@@ -170,5 +170,45 @@ BOOL dst_delete(bst *t, key_type k)
 }
 ```
 
-## 
+# Adelson-Velsky and Landis Tree
+
+## definitions
+
+​	In binary search tree has a problem: if we insert a sequence like $\{20,30,40,50,60,70\}$ into bst, the deepth of the bst is $6$, apparently it's not convient our algorithm. This situation called "degenerate". If we using this bst, the time complexity is $O(n)$. But if we adjust it a little bit, we'll get some new tree like AVL tree(binary balanced tree) , red black tree ...
+
+​	The different is AVL tree and bst is AVL tree's left and right child deepth with one absolute difference.If we define a balancing-factor is left tree hight minus right tree hight, is value must $-1,0,1$.
+
+## adjustment
+
+the ususal way to adjust AVL tree has two:
+
+1. single rotation
+2. double rotation
+
+and facing 4 situations
+
+1. LL: insert into left child's left tree
+2. RR: insert into right child's right tree
+3. LR: insert into left child's right tree
+4. RL: insert into right child's left tree
+
+The detailed is willed explained on wiki-pedia, so won'be recited here.
+
+# m-ary search tree
+
+​	If we want to search lots of data outside of inside storage, we must read data outside, But I/O operations will consume efficiency.Using binart search tree or AVL only storage two element infomation at a node,what if we set more interval so onr single node can storage more infomation.
+
+![](../imgs/7-bst2.jpg)
+
+If we want to find **53** 
+
+1. started from root, $53 \gt 35$, go into right tree
+2. $43 \lt 53 \lt 78$, go into middle tree
+3. found  **53**
+
+
+
+# reference 
+
+https://en.wikipedia.org/wiki/M-ary_tree
 
