@@ -5,12 +5,12 @@
 **1.properties**
 
 - The any two nodes in tree is not have the same value
-- If left tree isn't empty, the every node's value in left tree is smaller in root's value
-- If right tree isn't empty, the every node's value in right tree is bigger in root's value
+- If left tree isn't empty, the every node's value in left tree is smaller than root's value
+- If right tree isn't empty, the every node's value in right tree is bigger than root's value
 
 **important**
 
-- If we traverse a binary serach tree in **LVR**, we'll get a descending sequence. The binary search tree is so called as binary sort tree
+- If we traverse a binary serach tree in **LVR**, we'll get a ascending sequence. The binary search tree is so called as binary sort tree
 
 **2.data structure**
 
@@ -206,9 +206,53 @@ If we want to find **53**
 2. $43 \lt 53 \lt 78$, go into middle tree
 3. found  **53**
 
+# B- tree
+
+> In [computer science](https://en.wikipedia.org/wiki/Computer_science), a **B-tree** is a self-balancing [tree data structure](https://en.wikipedia.org/wiki/Tree_data_structure) that maintains sorted data and allows searches, sequential access, insertions, and deletions in [logarithmic time](https://en.wikipedia.org/wiki/Logarithmic_time).
+
+One speciality is all failure node is on the same layer, and
+
+1. root node have two children at least
+2. except root and failure node, the other nodes at least have $[m/2]$ nodes
+
+## properties
+
+### B- tree's height
+
+- **property**: if b-tree have $s$ failure nodes, the tree have $N=s-1$ nodes in total
+
+  Proof: 
+
+  1. each non-failure node contains element $a$ is smaller only one than it contained pointer $b$, it's $a=b-1$
+  2. assume we have $n$ non-fail nodes, $s$ failure nodes, $N$ nodes in B-tree, $t$ pointers in tree. So $N=t-n$
+  3. the sum of pointers equals non=fail plus failure nodes except the root. $t=n+s-1$
+  4. according to these two equaltions $N+n=t=n+s-1$,So $N=s-1$
+
+- **theorem**: A B-tree have $N$ elements and og order $m$ , have the height  $h \le 1+ log_{[m/2]}(N+1)/2$
+
+### search
+
+basically as same as m-ary search tree
+
+### insertion
+
+1. search if there's same element
+2. because the B-tree is a m-ary search tree, so after insertion the leaf elements must not more than $m-1$
+   - if insert succed, return;
+   - else, do separate
+3. **separate**. divided node `q` into three parts.
+   - $[1,[m/2]-1]$ keep in origin node
+   - $[[m/2]+1,m]$ store the element in new node `q'`
+   - $[m/2]$ and `q'` insert to the `q`'s parent node.(Normally $[m/2]$ is in parent node, `q'` is pointed by the parent)
+4. keep separate till their's no overflow
+
+
+
 
 
 # reference 
 
 https://en.wikipedia.org/wiki/M-ary_tree
+
+https://en.wikipedia.org/wiki/B-tree
 
