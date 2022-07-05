@@ -13,6 +13,6 @@ a way of implementation
 - [x] Chapter V   : Tree & Binary tree
 - [x] Chapter VI  : Set & Searching
 - [x] Chapter VII : Search Tree
-- [ ] Chapter IIX : Hash table
+- [x] Chapter IIX : Hash table
 - [ ] Chapter IX  : Graph
 - [ ] Chapter X   : Sort
