@@ -1,38 +1,47 @@
-#include <ADT/hash.h>
+#include <ADT/seq_list.h>
+#include <ADT/sort.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
 
+#define TEST_CASE 0x200
+
 int main()
 {
-    hash_table *ht = (hash_table*)malloc(sizeof(hash_table));
-    hash_create(ht,0x10);
+    printf("--------------init slist\n");
+    seq_list *list = (seq_list *)malloc(sizeof(seq_list));
+    slist_init(list,TEST_CASE);
+    printf("--------------filling values\n");
 
-    printf("--------------hash insert\n");
     int i,a;
     srand((unsigned)time(NULL));
-    for (i = 0; i < 0x15; i++)
+    for (i = 0; i < TEST_CASE; i++)
     {
         a = rand()%0x100;
-        hash_insert(ht,a);
+        slist_insert(list,i-1,a);
     }
-    hash_output(ht);
+    // slist_output(list);
 
-    printf("--------------hash delete\n");
-    int del_list[5];
-    for (i = 0; i < 5; i++)
-        del_list[i]=ht->elements[5+i];
-    for (i = 0; i < 5; i++)
-        hash_delete(ht,del_list[i]);
-    hash_output(ht);
+    
+    //-------------------------using algorithm
+    printf("--------------sorting\n");
+    // select_sort(list);
+    // insert_sort(list);
+    // bubble_sort(list);
+    quick_sort(list);
 
-    printf("--------------hash insert again\n");
-    for (i = 5; i < 10; i++)
+    // slist_output(list);
+
+    
+
+    printf("--------------checking\n");
+    for (i = 0; i < list->n-1; i++)
     {
-        a = rand()%0x100;
-        hash_insert(ht,a);
+        if(list->elements[i]>list->elements[i+1]){
+            printf("ERROR in %d,%d",i,i+1);
+            return 0;
+        }
     }
-    hash_output(ht);
-
+    printf("--------------Alright!\n");
     return 0;
 }

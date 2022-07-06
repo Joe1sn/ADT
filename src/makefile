@@ -18,7 +18,8 @@ $(BUILD)\main.exe: \
 	$(SRC)/algorithm/my_str.c \
 	$(SRC)/algorithm/bin_tree.c \
 	$(SRC)/algorithm/priority_queue.c \
-	$(SRC)/algorithm/hash.c
+	$(SRC)/algorithm/hash.c \
+	$(SRC)/algorithm/sort.c 
 
 	gcc $(DEBUG) $(INCLUDE) $(CFLAGS) $^ -o $@
 
