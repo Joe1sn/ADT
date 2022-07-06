@@ -12,7 +12,8 @@
         "tree.h": "c",
         "traverse.h": "c",
         "prirority_queue.h": "c",
-        "priority_queue.h": "c"
+        "priority_queue.h": "c",
+        "sort.h": "c"
     },
     "C_Cpp.errorSquiggles": "Disabled"
 }
