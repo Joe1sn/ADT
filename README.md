@@ -15,4 +15,4 @@ a way of implementation
 - [x] Chapter VII : Search Tree
 - [x] Chapter IIX : Hash table
 - [ ] Chapter IX  : Graph
-- [ ] Chapter X   : Sort
+- [x] Chapter X   : Sort
