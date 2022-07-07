@@ -79,7 +79,7 @@ According to the properties,if we insert element `e`
 3. if `e` is bigger than root, inseted it into right tree
 
 ```c
-BOOL bst_insert(bst *t, entry e){
+bool bst_insert(bst *t, entry e){
     bst_node *p=t, *q, *r;
     key_type = e.key;
     while(p)    //check the same,and set `q` to the proper position
@@ -121,7 +121,7 @@ Here we take example using the smallest node in right tree, it's **node_35**. An
 2. delete original **node_35**, because it's  leaf node or the node have only one child, so we can easily set the parent node and child node, Here **node_40**'s left child becoming **node_38**
 
 ```c
-BOOL dst_delete(bst *t, key_type k)
+bool dst_delete(bst *t, key_type k)
 {
     bst_node *c, *r, *s, *p = t, *q;
     //1.check if the node exists

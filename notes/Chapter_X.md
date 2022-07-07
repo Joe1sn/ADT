@@ -1,4 +1,4 @@
-# Sort
+# Inside Sort
 
 ok, one of the most fancy part about algorithm
 
@@ -18,7 +18,7 @@ ok, one of the most fancy part about algorithm
 
 recommend chinese post: https://www.zhihu.com/question/23148377/answer/718815659
 
-# simple selection sort
+## simple selection sort
 
 each loop select the smallest element in list and swap
 
@@ -55,7 +55,7 @@ attention: if start equals min_idx, their were point to same memory and that wil
 - time complexity: $O(n^2)$
 - space complexity: $O(1)$
 
-# insertion Sort
+## insertion Sort
 
 ![](../imgs/insertion_Sort.gif)
 
@@ -107,7 +107,7 @@ void insert_sort(seq_list *list){
   - average: $\sum^{n-1}_{i=1}(1+\frac{i}{2})=\frac{(n+4)(n-1)}{2}$
 - space complexity: $O(1)$
 
-# bubble sort
+## bubble sort
 
 ![](../imgs/Bubble.gif)
 
@@ -116,7 +116,7 @@ classic
 ```c
 void bubble_sort(seq_list *list){
     int i,j;
-    BOOL flag=false;
+    bool flag=false;
     while(flag!=true){
         flag=true;
         for (i = 0; i < list->n-1; i++)
@@ -138,7 +138,7 @@ void bubble_sort(seq_list *list){
   - average: $\frac{1}{n-1}\times\sum^{n-1}_{j=1}\sum^{n-1}_{i=1}(n-i)=\frac{n(2n-1)}{6}$
 - space complexity: $O(1)$ (due to swap)
 
-# quick sort
+## quick sort
 
 ![](../imgs/quick.gif)
 
@@ -209,3 +209,105 @@ another classic sort algorithm, it's recursive, and fastest on average
 - pass: $Q(n)=Q(\lfloor\frac{n-1}{2}\rfloor)+Q(\lceil\frac{n+1}{2}\rceil)$ $Q(0)=Q(1)=0$
 - time complexity: $O(n^2)$
 - space complexity: $O(n)$ (due to recursive)
+
+## merge sort
+
+see the sequence has $n$ elements is consist by the $n$ sub-sequence elements.each time sort the sub-sequence.
+
+obviously it has two steps: merge & sort.
+
+1. Degree of n-like import order Subsequence Two individual length-like $n/2$ child order;
+2. Opposite this two-individual order sort sort sort sort;
+3. General two-individual expulsion-favorable child order Consolidation One-individual expulsion order.
+
+![](../imgs/merge.gif)
+
+merge
+
+```c
+void merge(seq_list *list, element_type *temp, int low, int len_l, int len_r){
+    int i = low, j = low + len_l; //i,j index to first element in two sub-seq
+    while(i < low + len_l && j < low + len_l + len_r){ //index in combine seq
+        if(list->elements[i]<=list->elements[j])
+            *temp++ = list->elements[i++]; //first is smallest
+        else
+            *temp++ = list->elements[j++];
+    }
+    //copy the rest element
+    while(i < low + len_l)
+        *temp++ = list->elements[i++];
+    while(j < low + len_l + len_r)
+        *temp++ = list->elements[j++];
+}
+```
+
+temp is sorted element type sequence
+
+the Sort
+
+```c
+void merge_sort(seq_list *list){
+    element_type temp[list->n];
+    int low, len_l, len_r, i, size = 1;
+    while(size < list->n){  //sub-seq length not equal to seq
+        low = 0;            //ever time start at `elements[0]`
+        while(low + size < list->n){
+            len_l = size;   //get left-seq length
+            if(low + size * 2 < list->n )   //get right-seq length
+                len_r = size;
+            else
+                len_r = list->n - low - size;
+            merge(list, temp + low, low, len_l, len_r);
+            low += len_l + len_r;           //get to next two sub-seqs
+        }
+        for (i = 0; i < low; i++)   //copy the element
+            list->elements[i] = temp[i];
+        size *= 2;
+    }
+}
+```
+
+- stable? Yes
+- pass: $N=\lceil log_2n\rceil$
+- time complexity: $O(n\times log_2n)$
+- space complexity: $O(n)$ (due to store sub sequence)
+
+## heap sort
+
+<video src="https://vdn3.vzuu.com/SD/3bb38dfe-236a-11eb-8039-a6caf32b14c9.mp4?disable_local_cache=1&bu=078babd7&c=avc.0.0&f=mp4&expiration=1657161133&auth_key=1657161133-0-0-9aad2f380f8e0cba0d3db40de2dd74bf&v=tx&pu=078babd7"></video>
+
+keep out put the top element on the heap
+
+easy to implement it by using old codes
+
+```c
+void heap_srot(seq_list *list){
+    prior_q *heap = (prior_q *)malloc(sizeof(prior_q));
+    prior_q_create(heap, list->n);
+    int i;
+    for (i = 0; i < list->n; i++)
+        prior_q_append(heap, list->elements[i]);
+    for (i = 0; i < list->n; i++)
+        priro_q_serve(heap,&list->elements[i]);
+    prior_q_destroy(heap);
+    free(heap);
+}
+```
+
+- stable? No
+- pass: $N=n-1$
+- time complexity:
+  - best & avg: $O(n\times log_2n)$
+  - wrost: $O(n)$
+- space complexity: $O(1)$
+
+# Outside sort
+
+It happend in large data want to sorted.There's no code implement here.
+
+Omit.
+
+
+
+
+

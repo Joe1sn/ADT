@@ -13,7 +13,9 @@
         "traverse.h": "c",
         "prirority_queue.h": "c",
         "priority_queue.h": "c",
-        "sort.h": "c"
+        "sort.h": "c",
+        "binseach_tree.h": "c",
+        "ctime": "c"
     },
     "C_Cpp.errorSquiggles": "Disabled"
 }

@@ -7,7 +7,7 @@ void hash_create(hash_table *ht, int size){
     int i;
     ht->M=size;
     ht->num=0;
-    ht->empty=(BOOL *)malloc(sizeof(BOOL)*size);
+    ht->empty=(bool *)malloc(sizeof(bool)*size);
     ht->elements=(int *)malloc(sizeof(int)*size);
     for (i = 0; i < size; i++)
     {
@@ -31,14 +31,14 @@ void hash_clear(hash_table *ht){
     }
 }
 
-BOOL hash_is_empty(hash_table *ht){
+bool hash_is_empty(hash_table *ht){
     if(ht->num == 0)
         return true;
     else
         return false;
 }
 
-BOOL hash_is_full(hash_table *ht){
+bool hash_is_full(hash_table *ht){
     if(ht->num == ht->M)
         return true;
     else
@@ -62,7 +62,7 @@ int hash_search(hash_table *ht,int key){
     return NOTPRESENT;
 }
 
-BOOL hash_insert(hash_table *ht, int key){
+bool hash_insert(hash_table *ht, int key){
     int anchor,i;
     if(hash_is_full(ht))
         return false;
@@ -82,7 +82,7 @@ BOOL hash_insert(hash_table *ht, int key){
     return false;
 }
 
-BOOL hash_delete(hash_table *ht, int key){
+bool hash_delete(hash_table *ht, int key){
     if(hash_is_empty(ht))
         return false;
     int pos = hash_search(ht,key);

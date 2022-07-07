@@ -22,8 +22,8 @@ typedef struct bin_tree
 
 void create(bin_tree * bt);
 bt_node *new_node(t_element_type x, bt_node *ln, bt_node *rn);
-BOOL is_empty(bin_tree *bt);
-BOOL root(bin_tree *bt, t_element_type *x);
+bool is_empty(bin_tree *bt);
+bool root(bin_tree *bt, t_element_type *x);
 void make_tree(bin_tree *bt, t_element_type e, bin_tree *ln, bin_tree *rn);
 
 //---------traverse binary tree

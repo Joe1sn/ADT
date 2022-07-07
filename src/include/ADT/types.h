@@ -1,7 +1,7 @@
 #ifndef TYPES_H
 #define TYPES_H
 
-#define BOOL int
+#define bool int
 #define true 1
 #define false 0
 

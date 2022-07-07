@@ -111,7 +111,7 @@ void hash_create(hash_table *ht, int size){
     int i;
     ht->M=size;
     ht->num=0;
-    ht->empty=(BOOL *)malloc(sizeof(BOOL)*size);
+    ht->empty=(bool *)malloc(sizeof(bool)*size);
     ht->elements=(int *)malloc(sizeof(int)*size);
     for (i = 0; i < size; i++)
     {
@@ -150,7 +150,7 @@ int hash_search(hash_table *ht,int key){
 ### hash_insert
 
 ```c
-BOOL hash_insert(hash_table *ht, int key,){
+bool hash_insert(hash_table *ht, int key,){
     int anchor,i;
     if(hash_is_full(ht))
         return false;

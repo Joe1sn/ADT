@@ -134,7 +134,7 @@ bt_node *new_node(element_type x, bt_node *ln, bt_node *rn){
 `is_empty(bt)`:若二叉树bt为空，则返回TRUE，否则返回FALSE。
 
 ```c
-BOOL is_empty(bin_tree *bt){
+bool is_empty(bin_tree *bt){
     if(bt->root == NULL)
         return true;
     return false;
@@ -146,7 +146,7 @@ BOOL is_empty(bin_tree *bt){
 `root(bt，x)`:若二叉树bt非空，则用x返回其根结点的值，并返回TRUE，否则返回FALSE。
 
 ```c
-BOOL root(bin_tree *bt, element_type *x){
+bool root(bin_tree *bt, element_type *x){
     if (bt->root)
     {
         *x = bt->root->element;

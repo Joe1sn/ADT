@@ -20,7 +20,7 @@ typedef struct bst_node
 
 bst bst_rec_search(bst t, key_type k);
 bst bst_itr_search(bst t, key_type k);
-BOOL bst_insert(bst *t, entry e);
-BOOL dst_delete(bst *t, key_type k);
+bool bst_insert(bst *t, entry e);
+bool dst_delete(bst *t, key_type k);
 
 #endif

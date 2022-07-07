@@ -27,7 +27,7 @@ bst bst_itr_search(bst t, key_type k){
     return ERROR;
 }
 
-BOOL bst_insert(bst *t, entry e){
+bool bst_insert(bst *t, entry e){
     bst_node *p=t, *q, *r;
     key_type = e.key;
     while(p)    //check the same,and set `q` to the proper position
@@ -54,7 +54,7 @@ BOOL bst_insert(bst *t, entry e){
     return true;
 }
 
-BOOL dst_delete(bst *t, key_type k)
+bool dst_delete(bst *t, key_type k)
 {
     bst_node *c, *r, *s, *p = t, *q;
     //1.check if the node exists

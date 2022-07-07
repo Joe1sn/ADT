@@ -16,13 +16,13 @@ bt_node *new_node(t_element_type x, bt_node *ln, bt_node *rn){
     return p;
 }
 
-BOOL is_empty(bin_tree *bt){
+bool is_empty(bin_tree *bt){
     if(bt->root == NULL)
         return true;
     return false;
 }
 
-BOOL root(bin_tree *bt, t_element_type *x){
+bool root(bin_tree *bt, t_element_type *x){
     if (bt->root)
     {
         *x = bt->root->element;
