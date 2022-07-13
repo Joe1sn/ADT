@@ -15,7 +15,9 @@
         "priority_queue.h": "c",
         "sort.h": "c",
         "binseach_tree.h": "c",
-        "ctime": "c"
+        "ctime": "c",
+        "graph.h": "c",
+        "queue.h": "c"
     },
     "C_Cpp.errorSquiggles": "Disabled"
 }

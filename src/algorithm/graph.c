@@ -1,12 +1,14 @@
 #include <ADT/graph.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <ADT/queue.h>
 
 status mg_init(m_graph *mg, int n, element_type no_edge_value){
     int i, j;
     mg->n = n;
     mg->e = 0;
     mg->a = (element_type **)malloc(n*sizeof(element_type*));
+    mg->no_edge = no_edge_value;
     if (!mg->a)
         return ERROR;
     for(i=0; i<mg->n; i++)
@@ -57,7 +59,7 @@ status lg_init(l_graph *lg, int size){
     lg->n = size;
     lg->e = 0;
     lg->a = (e_node **)malloc(size*sizeof(e_node *));
-    if(lg->a)
+    if(!lg->a)
         return ERROR;
     else
     {
@@ -85,9 +87,10 @@ void lg_destroy(l_graph *lg){
 }
 
 status lg_exist(l_graph *lg, int u, int v){
+    e_node *p;
     if(u<0 || v<0 || u>lg->n-1 || v>lg->n-1 || u==v)
         return ERROR;
-    e_node *p = lg->a[u];
+    p = lg->a[u];
     while(p && p->adjvex!=v)
         p = p->next_arc;
     if(!p)
@@ -97,12 +100,12 @@ status lg_exist(l_graph *lg, int u, int v){
 }
 
 status lg_insert(l_graph *lg, int u, int v, element_type w){
-
+    e_node *p;
     if(u<0 || v<0 || u>lg->n-1 || v>lg->n-1 || u==v)
         return ERROR;
     if(lg_exist(lg, u, v))
         return DUPLICATE;
-    e_node *p = malloc(sizeof(e_node));
+    p = (e_node *)malloc(sizeof(e_node));
     p->adjvex = v;
     p->w = w;
     p->next_arc = lg->a[u];
@@ -131,4 +134,58 @@ status lg_delete(l_graph *lg, int u, int v){
     lg->e--;
     return OK;
 
+}
+
+void lg_dfs(l_graph *lg, int visted[], int v){
+    e_node *w;
+    printf("%d ",v);
+    visted[v] = 1;
+    for ( w = lg->a[v]; w; w=w->next_arc)//get marked
+        if(!visted[w->adjvex])
+            lg_dfs(lg,visted,w->adjvex);
+}
+
+void dfs_graph(l_graph *lg){
+    int i;
+    int *visted =(int *)malloc(sizeof(int)*lg->n);
+    for (i = 0; i < lg->n; i++)//init visted array
+        visted[i]=0;
+    for (i = 0; i < lg->n; i++)
+        if(!visted[i])
+            lg_dfs(lg, visted, i);
+    free(visted);    
+}
+
+void lg_bfs(l_graph *lg, int visted[], int v){
+    e_node *w;
+    queue q;
+    q_create(&q,lg->n);
+    visted[v]=1;
+    printf("%d ",v);
+    q_en_queue(&q,v);
+    while(q_is_empty(&q))
+    {
+        q_front(&q,&v);
+        q_de_queue(&q);
+        for (w = lg->a[v]; w; w=w->next_arc)
+        {
+            if(!visted[w->adjvex])  //not visted
+            {
+                visted[w->adjvex] = 1;
+                printf("%d ",w->adjvex);
+                q_en_queue(&q, w->adjvex);
+            }
+        }
+    }
+}
+
+void bfs_graph(l_graph *lg){
+    int i;
+    int *visted = (int *)malloc(sizeof(int)*lg->n);
+    for (i = 0; i < lg->n; i++)
+        visted[i] = 0;
+    for (i = 0; i < lg->n; i++)
+        if(!visted[i])
+            lg_bfs(lg,visted,i);
+    free(visted);
 }

@@ -34,13 +34,13 @@
 
 - algorithm
 
-  `g_init(G,n)`：创建含有$n$个顶点的无边图$G$
+  `g_init(G,n)`：创建含有 $n$ 个顶点的无边图 $G$
 
-  `g_destroy(G)`：撤销一个图$G$
+  `g_destroy(G)`：撤销一个图 $G$
 
-  `g_exist(G,u,v)`：搜索边$<u,v>$是否存在
+  `g_exist(G,u,v)`：搜索边 $<u,v>$ 是否存在
 
-  `g_insert(G,u,v,w)`：对图$G$中的边$<u,v>$设置权值为$w$的边
+  `g_insert(G,u,v,w)`：对图$G$中的边 $<u,v>$ 设置权值为$w$的边
 
   `remove(G,u,v)`：删除边
 
@@ -48,15 +48,15 @@
 
 假设有图$G$中有$n$个顶点，那么每个点最多就有$n$个边(包括自回路)。那么可以使用一个$n\times n$的矩阵表示，
 
-**对于无向图**：矩阵中的一个元素为$A[u][v]$，通过数值1表示存在$(u,v)$或$(v,u)$
+**对于无向图**：矩阵中的一个元素为 $A[u][v]$ ，通过数值1表示存在 $(u,v)$ 或 $(v,u)$
 
-**对于有向图**：矩阵中的一个元素为$A[u][v]$，通过数值1表示存在$<u,v>$
+**对于有向图**：矩阵中的一个元素为 $A[u][v]$ ，通过数值1表示存在 $<u,v>$
 
 **对于带权无向图**
 
-- $w(u,v)$：$(u,v)$或$(v,u)$成立
-- $0$：$u=v$成立
-- $-1$：其他
+- $w(u,v)$ ： $(u,v)$ 或 $(v,u)$ 成立
+- $0$ ： $u=v$ 成立
+- $-1$ ： 其他
 
 **对于带权有向图**
 
@@ -180,7 +180,7 @@ status lg_init(l_graph *lg, int size){
     lg->n = size;
     lg->e = 0;
     lg->a = (e_node **)malloc(size*sizeof(e_node *));
-    if(lg->a)
+    if(!lg->a)
         return ERROR;
     else
     {
@@ -215,7 +215,8 @@ void lg_destroy(l_graph *lg){
 ### 搜索
 
 ```c
-status lg_search(l_graph *lg, int u, int v){
+status lg_exist(l_graph *lg, int u, int v){
+    e_node *p;
     if(u<0 || v<0 || u>lg->n-1 || v>lg->n-1 || u==v)
         return ERROR;
     p = lg->a[u];
@@ -232,12 +233,12 @@ status lg_search(l_graph *lg, int u, int v){
 
 ```c
 status lg_insert(l_graph *lg, int u, int v, element_type w){
-
+    e_node *p;
     if(u<0 || v<0 || u>lg->n-1 || v>lg->n-1 || u==v)
         return ERROR;
     if(lg_exist(lg, u, v))
         return DUPLICATE;
-    e_node *p = malloc(sizeof(e_node));
+    p = (e_node *)malloc(sizeof(e_node));
     p->adjvex = v;
     p->w = w;
     p->next_arc = lg->a[u];
@@ -273,4 +274,172 @@ status lg_delete(l_graph *lg, int u, int v){
 ```
 
 算法基本上即使在管理多个链表构成的数列
+
+## 遍历
+
+### 深度优先(Depth First Search)
+
+类似于树中的遍历
+
+![](../imgs/9-graph2.jpg)
+
+一种递归实现
+
+```c
+void lg_dfs(l_graph *lg, int visted[], int v){
+    e_node *w;
+    printf("%d ",v);
+    visted[v] = 1;
+    for ( w = lg->a[v]; w; w=w->next_arc)//get marked
+        if(!visted[w->adjvex])
+            lg_dfs(lg,visted,w->adjvex);
+}
+```
+
+```c
+void dfs_graph(l_graph *lg){
+    int i;
+    int *visted =(int *)malloc(sizeof(int)*lg->n);
+    for (i = 0; i < lg->n; i++)//init visted array
+        visted[i]=0;
+    for (i = 0; i < lg->n; i++)
+        if(!visted[i])
+            lg_dfs(lg, visted, i);
+    free(visted);    
+}
+```
+
+由于每个节点仅被访问一次，设定点数为 $n$ ，边数为 $e$，
+
+- 使用邻接表表示时间复杂度 $O(n+e)$
+- 使用邻接矩阵表示时间复杂度 $O(n^2)$
+
+### 宽度优先(Breadth First Search)
+
+类似于树的层次遍历
+
+![](../imgs/9-graph3.jpg)
+
+```c
+void lg_bfs(l_graph *lg, int visted[], int v){
+    e_node *w;
+    queue q;
+    q_create(&q,lg->n);
+    visted[v]=1;
+    printf("%d ",v);
+    q_en_queue(&q,v);
+    while(q_is_empty(&q))
+    {
+        q_front(&q,&v);
+        q_de_queue(&q);
+        for (w = lg->a[v]; w; w=w->next_arc)
+        {
+            if(!visted[w->adjvex])  //not visted
+            {
+                visted[w->adjvex] = 1;
+                printf("%d ",w->adjvex);
+                q_en_queue(&q, w->adjvex);
+            }
+        }
+    }
+}
+
+void bfs_graph(l_graph *lg){
+    int i;
+    int *visted = (int *)malloc(sizeof(int)*lg->n);
+    for (i = 0; i < g->n; i++)
+        visted[i] = 0;
+    for (i = 0; i < g->n; i++)
+        if(!visted[i])
+            lg_bfs(lg,visted,i);
+    free(visted);
+}
+```
+
+这里的`queue`起到了同时访问的作用
+
+设定点数为 $n$ ，边数为 $e$，
+
+- 使用邻接表表示时间复杂度 $O(n+e)$
+- 使用邻接矩阵表示时间复杂度 $O(n^2)$
+
+## 测试
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <ADT/graph.h>
+
+int main()
+{
+    m_graph *mg = (m_graph *)malloc(sizeof(m_graph));
+    mg_init(mg, 6, -1);
+    mg_insert(mg,0,1,0);
+    mg_insert(mg,1,3,0);
+    mg_insert(mg,1,2,0);
+    mg_insert(mg,2,0,0);
+    mg_insert(mg,3,0,0);
+    mg_insert(mg,3,2,0);
+    mg_insert(mg,4,0,0);
+    mg_insert(mg,4,2,0);
+    mg_insert(mg,5,1,0);
+    mg_insert(mg,5,3,0);
+    int i,j;
+    for (i = 0; i < mg->n; i++){
+        for (j = 0; j < mg->n; j++)
+            printf("%d ",mg->a[i][j]);
+        printf("\n");
+    }
+    mg_destroy(mg);
+    free(mg);
+
+    //--------------------------------------
+    l_graph *lg = (l_graph *)malloc(sizeof(l_graph));
+    lg_init(lg,6);
+    lg_insert(lg,0,1,0);
+    lg_insert(lg,1,3,0);
+    lg_insert(lg,1,2,0);
+    lg_insert(lg,2,0,0);
+    lg_insert(lg,3,0,0);
+    lg_insert(lg,3,2,0);
+    lg_insert(lg,4,0,0);
+    lg_insert(lg,4,2,0);
+    lg_insert(lg,5,1,0);
+    lg_insert(lg,5,3,0);
+    
+    printf("\nDFS>\n");
+    dfs_graph(lg);
+    printf("\nBFS>\n");
+    bfs_graph(lg);
+    lg_destroy(lg);
+    free(lg);
+    return 0;
+}
+```
+
+输出
+
+```c
+0 0 -1 -1 -1 -1 
+-1 0 0 0 -1 -1  
+0 -1 0 -1 -1 -1 
+0 -1 0 0 -1 -1  
+0 -1 0 -1 0 -1  
+-1 0 -1 0 -1 0  
+
+DFS>
+0 1 2 3 4 5     
+BFS>
+0 1 2 3 4 5
+```
+
+# 拓扑序列
+
+
+
+
+
+
+
+
 

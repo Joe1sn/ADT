@@ -19,7 +19,9 @@ $(BUILD)\main.exe: \
 	$(SRC)/algorithm/bin_tree.c \
 	$(SRC)/algorithm/priority_queue.c \
 	$(SRC)/algorithm/hash.c \
-	$(SRC)/algorithm/sort.c 
+	$(SRC)/algorithm/sort.c \
+	$(SRC)/algorithm/queue.c \
+	$(SRC)/algorithm/graph.c
 
 	gcc $(DEBUG) $(INCLUDE) $(CFLAGS) $^ -o $@
 

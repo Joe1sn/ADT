@@ -6,7 +6,7 @@ typedef int element_type;
 
 typedef struct m_graph
 {
-    element_type a[][];     //matrix
+    element_type **a;     //matrix
     int n;
     int e;
     element_type no_edge;   //depend on taking the right or not
@@ -14,7 +14,7 @@ typedef struct m_graph
 
 status mg_init(m_graph *mg, int n, element_type no_edge_value);
 void mg_destroy(m_graph *mg);
-status mg_exist(m_graph *mg);
+status mg_exist(m_graph *mg, int u, int v);
 status mg_insert(m_graph *mg, int u, int v, element_type w);
 status mg_remove(m_graph *mg, int u, int v);
 
@@ -37,5 +37,10 @@ void lg_destroy(l_graph *lg);
 status lg_exist(l_graph *lg, int u, int v);
 status lg_insert(l_graph *lg, int u, int v, element_type w);
 status lg_delete(l_graph *lg, int u, int v);
+
+void lg_dfs(l_graph *lg, int visted[], int v);
+void dfs_graph(l_graph *lg);
+void lg_bfs(l_graph *lg, int visted[], int v);
+void bfs_graph(l_graph *lg);
 
 #endif
