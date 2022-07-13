@@ -43,4 +43,12 @@ void dfs_graph(l_graph *lg);
 void lg_bfs(l_graph *lg, int visted[], int v);
 void bfs_graph(l_graph *lg);
 
+void lg_degree(l_graph *lg, int *in_degree);
+status lg_top_sort(l_graph *lg, int *topo);
+
+void event_early(l_graph *lg, int *e_early, int *topo);
+void event_late(l_graph *lg, int *e_early, int *topo, int max);
+void active_early(l_graph *lg, int *a_early, int *e_early, int *topo);
+void active_late(l_graph *lg, int *a_late, int *e_late, int *topo, int max);
+
 #endif

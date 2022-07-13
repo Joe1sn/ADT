@@ -435,9 +435,180 @@ BFS>
 
 # 拓扑序列
 
+AOV网(Active On Vertex network)：是一个有向无环图
 
+## 拓扑排序
 
+1. 从图中选择一个输入度为0的顶点开始并输出
+2. 删除该顶点及其出边
+3. 重复1.2.直到不存在入度为0的点
 
+求出所有顶点入度
+
+```c
+void lg_degree(l_graph *lg, int in_degree){
+    int i;
+    e_node *p;
+    for (i = 0; i < lg->n; i++)
+    in_degree[i] = 0;
+    for (i = 0; i < g->n; i++)
+        for(p = lg->a[i]; p; p = p->next_arc)
+            in_degree[p->adjvex]++;
+}
+```
+
+然后将入度为0的顶点存入栈中，顶点邻接顶点入度减一
+
+```c
+status lg_top_sort(l_graph *lg, int *topo){
+    int i,j,k;
+    e_node *p;
+    stack s;
+    stack_create(&s,lg->n);
+    int *in_degree = (int *)malloc(sizeof(int)*lg->n);
+    lg_degree(lg, in_degree);
+    for(i=0; i<lg->n; i++)
+        if(!in_degree[i])
+            push(&s,i);
+    for(i=0; i<lg->n; i++)
+    {
+        if(stack_is_empty(&s))
+            return ERROR;
+        else
+        {
+            top(&s,&j);
+            pop(&s);
+            topo[i] = j;
+            printf("%d ",j);
+            for(p=lg->a[j]; p; p=p->next_arc)   //change the neibor
+            {
+                k=p->adjvex;
+                in_degree[k]--;
+                if(!in_degree[k])
+                    push(&s,k);
+            }
+        }
+        
+    }
+    return OK;
+}
+```
+
+## 关键路径
+
+![](../imgs/9-graph4.jpg)
+
+ 在 $(start,end)$ 内完成 $x$ 小时的事件，最早从 $start$ 开始，最迟从 $end-x$ 开始
+
+对于事件
+
+|                  | $V_0$ | $V_1$ | $V_2$ | $V_3$ | $V_4$ | $V_5$ | $V_6$ | $V_7$ | $V_8$ |
+| ---------------- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- |
+| $E_{early(v_i)}$ | 0     | 6     | 4     | 5     | 7     | 7     | 16    | 15    | 19    |
+| $E_{late(v_i)}$  | 0     | 6     | 6     | 9     | 7     | 11    | 17    | 15    | 19    |
+
+$E_{early(v_i)}=E_{v_{i-1}}+max\{<V_{i-1},V_i>\}$，可以理解为从开始到当前顶点的最大路径
+
+$E_{late(v_i)}=E_{early(n)}-max\{<V_i,V_n>\}$，可以理解为从开始到当前顶点的最大路径减去从当前到终点的最大路径，及距离开始最迟发生路径
+
+对于活动
+
+|                  | $A_0$ | $A_1$ | $A_2$ | $A_3$ | $A_4$ | $A_5$ | $A_6$ | $A_7$ | $A_8$ | $A_9$ | $A_{10}$ | $A_{11}$ |
+| ---------------- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | -------- | -------- |
+| $A_{early(a_i)}$ | 0     | 0     | 0     | 6     | 4     | 5     | 7     | 7     | 7     | 16    | 15       | 7        |
+| $A_{late(a_i)}$  | 0     | 2     | 4     | 6     | 6     | 9     | 8     | 7     | 11    | 17    | 15       | 18       |
+| 关键路径         | √     |       |       | √     |       |       |       | √     |       |       | √        |          |
+
+设活动 $a_k$ 关联的边为 $<v_i,v_j>$，则
+
+$A_{early(a_k)}=E_{early(v_i)}$：活动最早可能发生时间
+
+$A_{late(a_k)}=E_{late(v_j)}-weight<v_i,v_j>$：活动最晚发生时间
+
+若二者相等，则为关键路径，连起来就是事件发生完全至少要花多少事件
+
+1. event_early函数，顺拓扑序
+
+```c
+void event_early(l_graph *lg, int *e_early, int *topo)
+{
+    int i,k;
+    e_node *p;
+    for(i=0; i<lg->n; i++)  //init event early array
+        e_early[i] = 0;
+    for(i=0; i<lg->n; i++)
+    {
+        k = topo[i];
+        for(p = lg->A[k]; p; p=p->next_arc)
+        {
+            if(e_early[p->adjvex] < e_early[k] + p->w)
+                e_early[p->adjvex] = e_early[k] + p->w;
+        }
+    }
+}
+```
+
+2. event_late函数，逆拓扑序
+
+```c
+void event_late(l_graph *lg, int *e_early, int *topo, int max){
+    int i,k;
+    e_node *p;
+    for(i=0; i<lg->n; i++)  //init event late array
+        e_early[i] = max;
+    for(i=lg->n-2; i>-1; i--)
+    {
+        k = topo[i];
+        for(p = lg->A[k]; p; p=p->next_arc)
+        {
+            if(e_early[p->adjvex] > e_early[k] - p->w)
+                e_early[p->adjvex] = e_early[k] - p->w;
+        }
+    }    
+}
+```
+
+3. active_early
+
+```c
+void active_early(l_graph *lg, int *a_early, int *e_early, int *topo){
+    int i,k;
+    e_node *p;
+    for(i=0; i<lg->n; i++)  //init activity late array
+        a_early[i] = 0;
+    for(i=0; i<lg->n; i++)
+    {
+        k = topo[i];
+        for (p = lg->a[k]; p; p=p->next_arc)
+        {
+            if(p->adjvex == k)
+                a_early[p->next_arc->adjvex] = e_early[p->adjvex];
+        }
+        
+    }
+}
+```
+
+4. active_late
+
+```c
+void active_late(l_graph *lg, int *a_late, int *e_late, int *topo, int max){
+    int i,k;
+    e_node *p;
+    for(i=0; i<lg->n; i++)  //init activity late array
+        a_early[i] = max;
+    for(i=lg->n-2; i>-1; i--)
+    {
+        k = topo[i];
+        for (p = lg->a[k]; p; p=p->next_arc)
+        {
+            if(p->adjvex == k)
+                a_early[p->next_arc->adjvex] = e_late[p->adjvex]-p->w;
+        }
+        
+    }    
+}
+```
 
 
 

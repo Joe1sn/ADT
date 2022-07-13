@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <ADT/queue.h>
+#include <ADT/stack.h>
 
 status mg_init(m_graph *mg, int n, element_type no_edge_value){
     int i, j;
@@ -188,4 +189,114 @@ void bfs_graph(l_graph *lg){
         if(!visted[i])
             lg_bfs(lg,visted,i);
     free(visted);
+}
+
+void lg_degree(l_graph *lg, int *in_degree){
+    int i;
+    e_node *p;
+    for (i = 0; i < lg->n; i++)
+    in_degree[i] = 0;
+    for (i = 0; i < lg->n; i++)
+        for(p = lg->a[i]; p; p = p->next_arc)
+            in_degree[p->adjvex]++;
+}
+
+status lg_top_sort(l_graph *lg, int *topo){
+    int i,j,k;
+    e_node *p;
+    stack s;
+    stack_create(&s,lg->n);
+    int *in_degree = (int *)malloc(sizeof(int)*lg->n);
+    lg_degree(lg, in_degree);
+    for(i=0; i<lg->n; i++)
+        if(!in_degree[i])
+            push(&s,i);
+    for(i=0; i<lg->n; i++)
+    {
+        if(stack_is_empty(&s))
+            return ERROR;
+        else
+        {
+            top(&s,&j);
+            pop(&s);
+            topo[i] = j;
+            printf("%d ",j);
+            for(p=lg->a[j]; p; p=p->next_arc)   //change the neibor
+            {
+                k=p->adjvex;
+                in_degree[k]--;
+                if(!in_degree[k])
+                    push(&s,k);
+            }
+        }
+        
+    }
+    return OK;
+}
+
+void event_early(l_graph *lg, int *e_early, int *topo)
+{
+    int i,k;
+    e_node *p;
+    for(i=0; i<lg->n; i++)  //init event early array
+        e_early[i] = 0;
+    for(i=0; i<lg->n; i++)
+    {
+        k = topo[i];
+        for(p = lg->a[k]; p; p=p->next_arc)
+        {
+            if(e_early[p->adjvex] < e_early[k] + p->w)
+                e_early[p->adjvex] = e_early[k] + p->w;
+        }
+    }
+}
+
+void event_late(l_graph *lg, int *e_early, int *topo, int max){
+    int i,k;
+    e_node *p;
+    for(i=0; i<lg->n; i++)  //init event late array
+        e_early[i] = max;
+    for(i=lg->n-2; i>-1; i--)
+    {
+        k = topo[i];
+        for(p = lg->a[k]; p; p=p->next_arc)
+        {
+            if(e_early[p->adjvex] > e_early[k] - p->w)
+                e_early[p->adjvex] = e_early[k] - p->w;
+        }
+    }    
+}
+
+void active_early(l_graph *lg, int *a_early, int *e_early, int *topo){
+    int i,k;
+    e_node *p;
+    for(i=0; i<lg->n; i++)  //init activity late array
+        a_early[i] = 0;
+    for(i=0; i<lg->n; i++)
+    {
+        k = topo[i];
+        for (p = lg->a[k]; p; p=p->next_arc)
+        {
+            if(p->adjvex == k)
+                a_early[p->next_arc->adjvex] = e_early[p->adjvex];
+        }
+        
+    }
+}
+
+void active_late(l_graph *lg, int *a_late, int *e_late, int *topo, int max){
+    int i,k;
+    e_node *p;
+    for(i=0; i<lg->n; i++)  //init activity late array
+        a_late[i] = max;
+    for(i=lg->n-2; i>-1; i--)
+    {
+        k = topo[i];
+        for (p = lg->a[k]; p; p=p->next_arc)
+        {
+            if(p->adjvex == k)
+                a_late[p->next_arc->adjvex] = e_late[p->adjvex]-p->w;
+        }
+        
+    }    
 }

@@ -2,7 +2,7 @@
 #define STACK_H
 #include <ADT/types.h>
 
-typedef double element_type;
+typedef int element_type;
 
 typedef struct stack
 {
