@@ -17,6 +17,7 @@
 #define NOTPRESENT 4
 #define DUPLICATE 5
 
+#define INFINITY 0XFF
 // typedef char element_type;
 // typedef double element_type;
 // typedef int element_type;

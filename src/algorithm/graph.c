@@ -300,3 +300,50 @@ void active_late(l_graph *lg, int *a_late, int *e_late, int *topo, int max){
         
     }    
 }
+
+status prim(l_graph *lg, int k, int *close_vex, element_type *low_weight){
+    e_node *p;
+    int i,j;
+    element_type min;
+    int *is_mark = (int *)malloc(sizeof(int)*lg->n);    //mark the enode
+    if(k<0 || k>lg->n-1)    return ERROR;
+    for(i=0; i<lg->n; i++)
+    {
+        close_vex[i] = -1;
+        low_weight[i] = INFINITY;
+        is_mark[i] = 0;
+    }
+    //add the start enode
+    low_weight[k] = 0;  close_vex[k] = k;   is_mark[k] = 1;
+    for(i=0; i<lg->n; i++)
+    {
+        for(p=lg->a[k]; p; p=p->next_arc)
+        {
+            j = p->adjvex;
+            if( !(is_mark[j]) && (low_weight[j] > p->w) )
+            {
+                low_weight[j] = p->w;
+                close_vex[j] = k;
+            }
+        }
+        min = INFINITY;
+        for(j=0; j<lg->n; j++)
+        {
+            if( !(is_mark[j]) && low_weight[j]<min)
+            {
+                min = low_weight[j];
+                k=j;
+            }
+        }
+        is_mark[k] = 1;
+    }
+    for (i = 0; i < ld->n; i++)
+    {
+        printf("%d ",close_vex[i]);
+        printf("%d ",i);
+        printf("%d ",low_weight[i]);
+        printf("\n");
+    }
+    return OK;
+}
+

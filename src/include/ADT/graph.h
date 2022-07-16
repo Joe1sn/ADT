@@ -51,4 +51,6 @@ void event_late(l_graph *lg, int *e_early, int *topo, int max);
 void active_early(l_graph *lg, int *a_early, int *e_early, int *topo);
 void active_late(l_graph *lg, int *a_late, int *e_late, int *topo, int max);
 
+status prim(l_graph *lg, int k, int *close_vex, element_type *low_weight);
+
 #endif

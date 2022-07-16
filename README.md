@@ -14,5 +14,5 @@ a way of implementation
 - [x] Chapter VI  : Set & Searching
 - [x] Chapter VII : Search Tree
 - [x] Chapter IIX : Hash table
-- [ ] Chapter IX  : Graph
+- [x] Chapter IX  : Graph
 - [x] Chapter X   : Sort

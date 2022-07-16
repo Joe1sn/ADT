@@ -627,6 +627,57 @@ void active_late(l_graph *lg, int *a_late, int *e_late, int *topo, int max){
 
 
 
+```c
+status prim(l_graph *lg, int k, int *close_vex, element_type *low_weight){
+    e_node *p;
+    int i,j;
+    element_type min;
+    int *is_mark = (int *)malloc(sizeof(int)*lg->n);    //mark the enode
+    if(k<0 || k>lg->n-1)    return ERROR;
+    for(i=0; i<lg->n; i++)
+    {
+        close_vex[i] = -1;
+        low_weight[i] = INFINITY;
+        is_mark[i] = 0;
+    }
+    //add the start enode
+    low_weight[k] = 0;  close_vex[k] = k;   is_mark[k] = 1;
+    for(i=0; i<lg->n; i++)
+    {
+        for(p=lg->a[k]; p; p=p->next_arc)
+        {
+            j = p->adjvex;
+            if( !(is_mark[j]) && (low_weight[j] > p->w) )
+            {
+                low_weight[j] = p->w;
+                close_vex[j] = k;
+            }
+        }
+        min = INFINITY;
+        for(j=0; j<lg->n; j++)
+        {
+            if( !(is_mark[j]) && low_weight[j]<min)
+            {
+                min = low_weight[j];
+                k=j;
+            }
+        }
+        is_mark[k] = 1;
+    }
+    for (i = 0; i < ld->n; i++)
+    {
+        printf("%d ",close_vex[i]);
+        printf("%d ",i);
+        printf("%d ",low_weight[i]);
+        printf("\n");
+    }
+    return OK;
+}
+```
+
+- `close_vex` 存放蓝色顶点编号
+- `low_weight` 存放当前红色顶点通往蓝色编号的路径的权值
+
 ## 克鲁斯卡尔算法
 
 从边开始选择，从最小边开始，若当前图中不构成回路，添加进最小生成树；若构成回路则删除这条边
@@ -634,4 +685,14 @@ void active_late(l_graph *lg, int *a_late, int *e_late, int *topo, int max){
 ![](../imgs/9-graph6.jpg)
 
 关于回路的判断：每进行一次可以有一个合并操作，比如 $ <0,5>,<5,2> $ 可以合并为 $ <0,2> $ ，如果有了 $ <2,0> $ 的边加入最小生成树的话，合并为 $ <0,0> $，从而仅仅判断`agjvex`和`next_arc`就可以判断回路了
+
+# 单源最短路径
+
+## 迪杰斯特拉
+
+本质上就是动态规划的思想，从某个顶点开始，找出最近点的路径，然后状态转移找到其他点的最近距离
+
+## 弗洛伊德
+
+
 
