@@ -437,7 +437,7 @@ BFS>
 
 AOV网(Active On Vertex network)：是一个有向无环图
 
-## 拓扑排序
+## AOV 拓扑排序
 
 1. 从图中选择一个输入度为0的顶点开始并输出
 2. 删除该顶点及其出边
@@ -494,7 +494,7 @@ status lg_top_sort(l_graph *lg, int *topo){
 }
 ```
 
-## 关键路径
+## AOE 关键路径
 
 ![](../imgs/9-graph4.jpg)
 
