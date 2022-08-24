@@ -29,8 +29,7 @@ cd ./src && make
 
 ```
 cd ./build/test_case
-gcc ./hash_table.c -std=c99 -ladt -L.. -I ../../src/incl
-ude -o testcase
+gcc ./hash_table.c -std=c99 -ladt -L.. -I ../../src/include -o testcase
 ```
 
 ### flaws
