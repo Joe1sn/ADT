@@ -27,9 +27,26 @@ cd ./src && make
 
 ### 2. linkage
 
+linux_x64
 ```
-cd ./build/test_case
+cd ./build/
+export LD_LIBRARY_PATH="$(pwd)"
+cd ./test_case
 gcc ./hash_table.c -std=c99 -ladt -L.. -I ../../src/include -o testcase
+```
+
+linux_x32
+```
+cd ./build/
+export LD_LIBRARY_PATH="$(pwd)"
+cd ./test_case
+gcc -m32 ./hash_table.c -std=c99 -ladt -L.. -I ../../src/include -o testcase
+```
+
+windows_x32
+```
+cd .\build
+gcc .\test_case\hash_table.c -std=c99 -ladt -L. -I ..\src\include -o testcase.exe
 ```
 
 ### flaws

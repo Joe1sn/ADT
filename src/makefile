@@ -3,14 +3,12 @@ SRC:=.
 DEBUG:= -g
 CFLAGS:= -std=c11
 CFLAGS+= -shared
-CFLAGS+= -fPIC
-CFLAGS+= -m32
 INCLUDE:=-I ./include
 
 $(BUILD)/%.o: $(SRC)/%.c
 	gcc $(CFLAGS) $(DEBUG) $(INCLUDE) -c $< -o $@
 
-$(BUILD)/libadt.so: \
+$(BUILD)/libadt.dll: \
 	$(SRC)/algorithm/queue.c \
 	$(SRC)/algorithm/stack.c \
 	$(SRC)/algorithm/array.c \
