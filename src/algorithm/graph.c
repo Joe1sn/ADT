@@ -337,7 +337,7 @@ status prim(l_graph *lg, int k, int *close_vex, element_type *low_weight){
         }
         is_mark[k] = 1;
     }
-    for (i = 0; i < ld->n; i++)
+    for (i = 0; i < lg->n; i++)
     {
         printf("%d ",close_vex[i]);
         printf("%d ",i);

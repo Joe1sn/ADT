@@ -7,7 +7,7 @@ make.exe all --print-data-base --no-builtin-variables --no-builtin-rules --quest
 # There is NO WARRANTY, to the extent permitted by law.
  
 
-# Make data base, printed on Sat Jul 16 13:23:51 2022
+# Make data base, printed on Sun Jul 17 09:07:50 2022
 
 # Variables
 
@@ -58,7 +58,7 @@ PROGRAMW6432 = C:\Program Files
 # environment
 PROGRAMDATA = C:\ProgramData
 # environment
-VSCODE_CWD = C:\Users\13013\AppData\Local\Programs\Microsoft VS Code
+VSCODE_CWD = c:\users\13013\appdata\local\programs\microsoft vs code
 # environment
 PATH = C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\VMware\VMware Workstation\bin\;D:\INK;C:\MinGW\bin;C:\WINDOWS\system32;C:\WINDOWS;D:\Software\Xshell\;D:\Software\XFTP\;C:\Users\13013\AppData\Local\Programs\Python\Python38\Lib\site-packages\pyqt5_tools;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Program Files\MySQL\MySQL Server 8.0\bin;C:\Program Files\dotnet\;C:\Program Files (x86)\dotnet\;D:\metasploit-framework\bin\;C:\Windows\System32\WindowsPowerShell\v1.0;C:\Program Files\Git\cmd;C:\Users\13013\AppData\Local\Programs\Python\Python38;C:\Python26;C:\Go\bin;C:\Program Files\Docker\Docker\resources\bin;C:\ProgramData\DockerDesktop\version-bin;C:\Program Files (x86)\CMake\bin;C:\apache-maven-3.8.4\bin;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files (x86)\MuMu\emulator\nemu\vmonitor\bin;D:\Software\Matlab\runtime\win64;D:\Software\Matlab\bin;D:\Software\Matlab\polyspace\bin;C:\Program Files\nodejs\;D:\HackTools\2-web\sqlmap;C:\Library\Developer\Toolchains\unknown-Asserts-development.xctoolchain\usr\bin;C:\Library\Swift-development\bin;C:\Library\icu-69.1\usr\bin;C:\Program Files\OpenVPN\bin;C:\Users\13013\.cargo\bin;C:\Ruby27-x64\bin;C:\Program Files\MySQL\MySQL Shell 8.0\bin\;C:\Users\13013\AppData\Local\Programs\Python\Python38\Scripts\;C:\Users\13013\AppData\Local\Programs\Python\Python38\;C:\Users\13013\AppData\Local\Microsoft\WindowsApps;C:\Users\13013\AppData\Local\JetBrains\PyCharm Community Edition 2020.1\bin;C:\Program Files (x86)\Pandoc;C:\Users\13013\AppData\Local\Microsoft\WindowsApps;C:\Users\13013\.dotnet\tools;C:\Program Files (x86)\Nmap;C:\Program Files\JetBrains\GoLand 2021.1\bin;;C:\Program Files\Azure Data Studio\bin;C:\Program Files\Java\jre1.8.0_121\bin;D:\metasploit-framework\bin;C:\Users\13013\go\bin;C:\Program Files\CMake\bin;C:\Users\13013\AppData\Local\Programs\Microsoft VS Code\bin;C:\Software\apache-tomcat-8.5.77\bin;C:\Users\13013\AppData\Roaming\npm;
 # environment
@@ -84,12 +84,11 @@ ELECTRON_RUN_AS_NODE = 1
 # environment
 LIB = C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\lib\x86;C:\Program Files (x86)\Windows Kits\10\Lib\10.0.17763.0\ucrt\x86;C:\Program Files (x86)\Windows Kits\10\Lib\10.0.17763.0\um\x86;C:\Program Files (x86)\Windows Kits\10\Lib\10.0.17763.0\ucrt_enclave\x64;C:\Program Files (x86)\Windows Kits\10\Lib\10.0.10586.0\ucrt\x86;C:\Program Files (x86)\Windows Kits\10\Lib\10.0.10586.0\um\x86;C:\Program Files (x86)\Windows Kits\10\Lib\10.0.10586.0\ucrt_enclave\x86;C:\Program Files (x86)\Windows Kits\8.1\Lib\winv6.3\um\x86;$(WindowsSDK_LibraryPath_x86);
 # default
-.FEATURES := target-specific order-only second-expansion else-if shortest-st 
-em undefine oneshell archives jobserver
+.FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell archives jobserver
 # automatic
 %F = $(notdir $%)
 # environment
-CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_18416_DLOWMYDHQNWWDMJZ
+CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_11636_APNIJNYIPSMTDPHE
 # environment
 COMPUTERNAME = MSI
 # environment
@@ -199,8 +198,7 @@ DEVELOPER_DIR = C:\Library\Developer
 # environment
 LC_ALL = C
 # environment
-CONFIGSETROOT = C:\WINDOWS\ConfigSetR 
-oot
+CONFIGSETROOT = C:\WINDOWS\ConfigSetRoot
 # automatic
 ^F = $(notdir $^)
 # default
@@ -228,7 +226,7 @@ PROCESSOR_LEVEL = 6
 # environment
 FPS_BROWSER_APP_PROFILE_STRING = Internet Explorer
 # environment
-VSCODE_PID = 18416
+VSCODE_PID = 11636
 # environment
 USERDOMAIN_ROAMINGPROFILE = MSI
 # variable set hash-table stats:
@@ -252,8 +250,7 @@ USERDOMAIN_ROAMINGPROFILE = MSI
 # D:\metasploit-framework\bin (key D:/metasploit-framework/bin, mtime 1631498467): 23 files, no impossibilities.
 # . (key d:/Github/ADT, mtime 1656481588): 11 files, no impossibilities.
 # C:\Users\13013\AppData\Local\Microsoft\WindowsApps (key C:/Users/13013/AppData/Local/Microsoft/WindowsApps, mtime 1655954659): 25 files, no impossibilities.
-# C:\Program Files\MySQL\MySQL Shell 8.0\bin\ (key C:/Program Files/MySQL/MySQL Shell 8.0/bi 
-n/, mtime 1588340816): 7 files, no impossibilities.
+# C:\Program Files\MySQL\MySQL Shell 8.0\bin\ (key C:/Program Files/MySQL/MySQL Shell 8.0/bin/, mtime 1588340816): 7 files, no impossibilities.
 # C:\Program Files (x86)\dotnet\ (key C:/Program Files (x86)/dotnet/, mtime 1652493554): 8 files, no impossibilities.
 # D:\metasploit-framework\bin\ (key D:/metasploit-framework/bin/, mtime 1631498467): 23 files, no impossibilities.
 # D:\INK (key D:/INK, mtime 1656164787): 84 files, no impossibilities.
@@ -271,8 +268,7 @@ n/, mtime 1588340816): 7 files, no impossibilities.
 # C:\Users\13013\.dotnet\tools: could not be stat'd.
 # D:\HackTools\2-web\sqlmap (key D:/HackTools/2-web/sqlmap, mtime 1652458382): 19 files, no impossibilities.
 # C:\Program Files\Docker\Docker\resources\bin (key C:/Program Files/Docker/Docker/resources/bin, mtime 1633661603): 13 files, no impossibilities.
-# D:\Software\Matlab\bin (key D:/Software/Matlab/bin, mtime 1649491983): 19 files 
-, no impossibilities.
+# D:\Software\Matlab\bin (key D:/Software/Matlab/bin, mtime 1649491983): 19 files, no impossibilities.
 # C:\Users\13013\.cargo\bin (key C:/Users/13013/.cargo/bin, mtime 1637164852): 14 files, no impossibilities.
 # C:\Users\13013\AppData\Local\JetBrains\PyCharm Community Edition 2020.1\bin: could not be stat'd.
 # C:\Ruby27-x64\bin (key C:/Ruby27-x64/bin, mtime 1612692406): 23 files, no impossibilities.
@@ -285,14 +281,13 @@ n/, mtime 1588340816): 7 files, no impossibilities.
 # C:\Program Files\dotnet\ (key C:/Program Files/dotnet/, mtime 1652493467): 11 files, no impossibilities.
 # D:\Software\Xshell\ (key D:/Software/Xshell/, mtime 1647659254): 39 files, no impossibilities.
 # C:\Program Files (x86)\Nmap (key C:/Program Files (x86)/Nmap, mtime 1614991350): 37 files, no impossibilities.
-# C:\WINDOWS\system32 (key C:/WINDOWS/system32, mtime 1657944265): 3272 files, no impossibilities.
+# C:\WINDOWS\system32 (key C:/WINDOWS/system32, mtime 1658017413): 3272 files, no impossibilities.
 # C:\Program Files (x86)\Pandoc (key C:/Program Files (x86)/Pandoc, mtime 1587449724): 7 files, no impossibilities.
 # C:\Program Files (x86)\CMake\bin: could not be stat'd.
 # C:\Go\bin (key C:/Go/bin, mtime 1633184298): 4 files, no impossibilities.
 # C:\Software\apache-tomcat-8.5.77\bin (key C:/Software/apache-tomcat-8.5.77/bin, mtime 1648691426): 27 files, no impossibilities.
 # C:\Program Files\Azure Data Studio\bin (key C:/Program Files/Azure Data Studio/bin, mtime 1619492855): 4 files, no impossibilities.
-# C:\Users\13013\AppData\Loc 
-al\Programs\Python\Python38\Scripts\ (key C:/Users/13013/AppData/Local/Programs/Python/Python38/Scripts/, mtime 1654477492): 232 files, no impossibilities.
+# C:\Users\13013\AppData\Local\Programs\Python\Python38\Scripts\ (key C:/Users/13013/AppData/Local/Programs/Python/Python38/Scripts/, mtime 1654477492): 232 files, no impossibilities.
 # C:\Users\13013\go\bin: could not be stat'd.
 # C:\Users\13013\AppData\Local\Programs\Python\Python38\ (key C:/Users/13013/AppData/Local/Programs/Python/Python38/, mtime 1653477714): 28 files, no impossibilities.
 # C:\Program Files (x86)\VMware\VMware Workstation\bin\ (key C:/Program Files (x86)/VMware/VMware Workstation/bin/, mtime 1621834124): 4 files, no impossibilities.
@@ -363,7 +358,7 @@ GNUmakefile:
 # strcache performance: lookups = 4864 / hit rate = 5%
 # hash-table stats:
 # Load=4600/8192=56%, Rehash=0, Collisions=2490/4864=51%
-# Finished Make data base on Sat Jul 16 13:23:52 2022
+# Finished Make data base on Sun Jul 17 09:07:50 2022
 
  
 make.exe: *** No rule to make target 'all'.  Stop.

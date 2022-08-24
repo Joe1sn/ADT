@@ -1,17 +1,30 @@
-BUILD:=..\build
+BUILD:=../build
 SRC:=.
 DEBUG:= -g
 CFLAGS:= -std=c11
-INCLUDE:=-I .\include
+CFLAGS+= -shared
+CFLAGS+= -fPIC
+CFLAGS+= -m32
+INCLUDE:=-I ./include
 
 $(BUILD)/%.o: $(SRC)/%.c
 	gcc $(CFLAGS) $(DEBUG) $(INCLUDE) -c $< -o $@
 
-$(BUILD)\main.exe: \
-	$(SRC)/main.c \
+$(BUILD)/libadt.so: \
 	$(SRC)/algorithm/queue.c \
 	$(SRC)/algorithm/stack.c \
-	$(SRC)/algorithm/graph.c
+	$(SRC)/algorithm/array.c \
+	$(SRC)/algorithm/double_link.c \
+	$(SRC)/algorithm/graph.c \
+	$(SRC)/algorithm/hash.c \
+	$(SRC)/algorithm/link_list.c \
+	$(SRC)/algorithm/my_str.c \
+	$(SRC)/algorithm/seq_list.c \
+	$(SRC)/algorithm/set.c \
+	$(SRC)/algorithm/sort.c \
+	$(SRC)/algorithm/set.c \
+	$(SRC)/algorithm/priority_queue.c \
+	$(SRC)/algorithm/hash.c 
 
 	gcc $(DEBUG) $(INCLUDE) $(CFLAGS) $^ -o $@
 
