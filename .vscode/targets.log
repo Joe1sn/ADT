@@ -7,7 +7,7 @@ make.exe all --print-data-base --no-builtin-variables --no-builtin-rules --quest
 # There is NO WARRANTY, to the extent permitted by law.
  
 
-# Make data base, printed on Sun Jul 17 09:07:50 2022
+# Make data base, printed on Wed Aug 24 20:58:27 2022
 
 # Variables
 
@@ -36,7 +36,7 @@ SHELL := sh.exe
 # environment
 WINDIR = C:\WINDOWS
 # environment
-VSCODE_NLS_CONFIG = {"locale":"zh-cn","availableLanguages":{"*":"zh-cn"},"_languagePackId":"1d735750dbb1b9066c7513078396ba0f.zh-cn","_translationsConfigFile":"C:\\Users\\13013\\AppData\\Roaming\\Code\\clp\\1d735750dbb1b9066c7513078396ba0f.zh-cn\\tcf.json","_cacheRoot":"C:\\Users\\13013\\AppData\\Roaming\\Code\\clp\\1d735750dbb1b9066c7513078396ba0f.zh-cn","_resolvedLanguagePackCoreLocation":"C:\\Users\\13013\\AppData\\Roaming\\Code\\clp\\1d735750dbb1b9066c7513078396ba0f.zh-cn\\b06ae3b2d2dbfe28bca3134cc6be65935cdfea6a","_corruptedFile":"C:\\Users\\13013\\AppData\\Roaming\\Code\\clp\\1d735750dbb1b9066c7513078396ba0f.zh-cn\\corrupted.info","_languagePackSupport":true}
+VSCODE_NLS_CONFIG = {"locale":"zh-cn","availableLanguages":{"*":"zh-cn"},"_languagePackId":"cc0490d1397af23dc5bf44a96fe15dbb.zh-cn","_translationsConfigFile":"C:\\Users\\13013\\AppData\\Roaming\\Code\\clp\\cc0490d1397af23dc5bf44a96fe15dbb.zh-cn\\tcf.json","_cacheRoot":"C:\\Users\\13013\\AppData\\Roaming\\Code\\clp\\cc0490d1397af23dc5bf44a96fe15dbb.zh-cn","_resolvedLanguagePackCoreLocation":"C:\\Users\\13013\\AppData\\Roaming\\Code\\clp\\cc0490d1397af23dc5bf44a96fe15dbb.zh-cn\\e4503b30fc78200f846c62cf8091b76ff5547662","_corruptedFile":"C:\\Users\\13013\\AppData\\Roaming\\Code\\clp\\cc0490d1397af23dc5bf44a96fe15dbb.zh-cn\\corrupted.info","_languagePackSupport":true}
 # environment
 PYCHARM COMMUNITY EDITION = C:\Users\13013\AppData\Local\JetBrains\PyCharm Community Edition 2020.1\bin;
 # environment
@@ -58,7 +58,7 @@ PROGRAMW6432 = C:\Program Files
 # environment
 PROGRAMDATA = C:\ProgramData
 # environment
-VSCODE_CWD = c:\users\13013\appdata\local\programs\microsoft vs code
+VSCODE_CWD = C:\Users\13013\AppData\Local\Programs\Microsoft VS Code
 # environment
 PATH = C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\VMware\VMware Workstation\bin\;D:\INK;C:\MinGW\bin;C:\WINDOWS\system32;C:\WINDOWS;D:\Software\Xshell\;D:\Software\XFTP\;C:\Users\13013\AppData\Local\Programs\Python\Python38\Lib\site-packages\pyqt5_tools;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Program Files\MySQL\MySQL Server 8.0\bin;C:\Program Files\dotnet\;C:\Program Files (x86)\dotnet\;D:\metasploit-framework\bin\;C:\Windows\System32\WindowsPowerShell\v1.0;C:\Program Files\Git\cmd;C:\Users\13013\AppData\Local\Programs\Python\Python38;C:\Python26;C:\Go\bin;C:\Program Files\Docker\Docker\resources\bin;C:\ProgramData\DockerDesktop\version-bin;C:\Program Files (x86)\CMake\bin;C:\apache-maven-3.8.4\bin;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files (x86)\MuMu\emulator\nemu\vmonitor\bin;D:\Software\Matlab\runtime\win64;D:\Software\Matlab\bin;D:\Software\Matlab\polyspace\bin;C:\Program Files\nodejs\;D:\HackTools\2-web\sqlmap;C:\Library\Developer\Toolchains\unknown-Asserts-development.xctoolchain\usr\bin;C:\Library\Swift-development\bin;C:\Library\icu-69.1\usr\bin;C:\Program Files\OpenVPN\bin;C:\Users\13013\.cargo\bin;C:\Ruby27-x64\bin;C:\Program Files\MySQL\MySQL Shell 8.0\bin\;C:\Users\13013\AppData\Local\Programs\Python\Python38\Scripts\;C:\Users\13013\AppData\Local\Programs\Python\Python38\;C:\Users\13013\AppData\Local\Microsoft\WindowsApps;C:\Users\13013\AppData\Local\JetBrains\PyCharm Community Edition 2020.1\bin;C:\Program Files (x86)\Pandoc;C:\Users\13013\AppData\Local\Microsoft\WindowsApps;C:\Users\13013\.dotnet\tools;C:\Program Files (x86)\Nmap;C:\Program Files\JetBrains\GoLand 2021.1\bin;;C:\Program Files\Azure Data Studio\bin;C:\Program Files\Java\jre1.8.0_121\bin;D:\metasploit-framework\bin;C:\Users\13013\go\bin;C:\Program Files\CMake\bin;C:\Users\13013\AppData\Local\Programs\Microsoft VS Code\bin;C:\Software\apache-tomcat-8.5.77\bin;C:\Users\13013\AppData\Roaming\npm;
 # environment
@@ -66,7 +66,8 @@ COMMONPROGRAMW6432 = C:\Program Files\Common Files
 # environment
 ZES_ENABLE_SYSMAN = 1
 # environment
-VS150COMCOMNTOOLS = C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\Tools\
+VS150COMCOMNTOOLS = C:\Program Files (x86)\ 
+Microsoft Visual Studio\2017\Community\Common7\Tools\
 # environment
 PROCESSOR_ARCHITECTURE = x86
 # environment
@@ -88,11 +89,9 @@ LIB = C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSV
 # automatic
 %F = $(notdir $%)
 # environment
-CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_11636_APNIJNYIPSMTDPHE
+CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_19336_OGNAYCUJJHTKJDDS
 # environment
 COMPUTERNAME = MSI
-# environment
-QT_QPA_PLATFORM_PLUGIN_PATH = C:\Users\13013\AppData\Local\Programs\Python\Python38\Lib\site-packages\pyqt5_tools\Qt\bin\plugins
 # environment
 PROGRAMFILES = C:\Program Files (x86)
 # environment
@@ -110,7 +109,7 @@ VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
 # environment
 PT6HOME = D:\Software\Cisco Packet Tracer 6.2sv
 # environment
-VSCODE_CODE_CACHE_PATH = C:\Users\13013\AppData\Roaming\Code\CachedData\b06ae3b2d2dbfe28bca3134cc6be65935cdfea6a
+VSCODE_CODE_CACHE_PATH = C:\Users\13013\AppData\Roaming\Code\CachedData\e4503b30fc78200f846c62cf8091b76ff5547662
 # environment
 APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = 1
 # environment
@@ -162,7 +161,7 @@ PROCESSOR_IDENTIFIER = Intel64 Family 6 Model 158 Stepping 10, GenuineIntel
 # environment
 OS = Windows_NT
 # environment
-VSCODE_IPC_HOOK = \\.\pipe\7273e8300e9a777677633b930729892c-1.69.1-main-sock
+VSCODE_IPC_HOOK = \\.\pipe\7273e8300e9a777677633b930729892c-1.70.2-main-sock
 # environment
 HOMEPATH = \Users\13013
 # environment
@@ -184,7 +183,8 @@ APPDATA = C:\Users\13013\AppData\Roaming
 # environment
 TEMP = C:\Users\13013\AppData\Local\Temp
 # environment
-COMSPEC = C:\WINDOWS\system32\cmd.exe
+COMSPEC 
+ = C:\WINDOWS\system32\cmd.exe
 # environment
 VCINSTALLDIR = C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\
 # default
@@ -226,11 +226,11 @@ PROCESSOR_LEVEL = 6
 # environment
 FPS_BROWSER_APP_PROFILE_STRING = Internet Explorer
 # environment
-VSCODE_PID = 11636
+VSCODE_PID = 19336
 # environment
 USERDOMAIN_ROAMINGPROFILE = MSI
 # variable set hash-table stats:
-# Load=109/1024=11%, Rehash=0, Collisions=13/125=10%
+# Load=108/1024=11%, Rehash=0, Collisions=13/124=10%
 
 # Pattern-specific Variable Values
 
@@ -247,21 +247,23 @@ USERDOMAIN_ROAMINGPROFILE = MSI
 # C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR (key C:/Program Files/NVIDIA Corporation/NVIDIA NvDLISR, mtime 1553240001): 5 files, no impossibilities.
 # C:\Program Files\MySQL\MySQL Server 8.0\bin (key C:/Program Files/MySQL/MySQL Server 8.0/bin, mtime 1588340680): 45 files, no impossibilities.
 # C:\Users\13013\AppData\Local\Programs\Python\Python38\Lib\site-packages\pyqt5_tools (key C:/Users/13013/AppData/Local/Programs/Python/Python38/Lib/site-packages/pyqt5_tools, mtime 1595332306): 11 files, no impossibilities.
-# D:\metasploit-framework\bin (key D:/metasploit-framework/bin, mtime 1631498467): 23 files, no impossibilities.
+# D:\metasploit-framework\bin (key D:/metasploit-framework/bin, mtim 
+e 1631498467): 23 files, no impossibilities.
 # . (key d:/Github/ADT, mtime 1656481588): 11 files, no impossibilities.
-# C:\Users\13013\AppData\Local\Microsoft\WindowsApps (key C:/Users/13013/AppData/Local/Microsoft/WindowsApps, mtime 1655954659): 25 files, no impossibilities.
+# C:\Users\13013\AppData\Local\Microsoft\WindowsApps (key C:/Users/13013/AppData/Local/Microsoft/WindowsApps, mtime 1659746872): 25 files, no impossibilities.
 # C:\Program Files\MySQL\MySQL Shell 8.0\bin\ (key C:/Program Files/MySQL/MySQL Shell 8.0/bin/, mtime 1588340816): 7 files, no impossibilities.
 # C:\Program Files (x86)\dotnet\ (key C:/Program Files (x86)/dotnet/, mtime 1652493554): 8 files, no impossibilities.
 # D:\metasploit-framework\bin\ (key D:/metasploit-framework/bin/, mtime 1631498467): 23 files, no impossibilities.
-# D:\INK (key D:/INK, mtime 1656164787): 84 files, no impossibilities.
+# D:\INK (key D:/INK, mtime 1661242443): 85 files, no impossibilities.
 # C:\Program Files\Git\cmd (key C:/Program Files/Git/cmd, mtime 1632231419): 8 files, no impossibilities.
 # C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common (key C:/Program Files (x86)/NVIDIA Corporation/PhysX/Common, mtime 1640869240): 12 files, no impossibilities.
-# C:\Program Files\JetBrains\GoLand 2021.1\bin (key C:/Program Files/JetBrains/GoLand 2021.1/bin, mtime 1618889814): 31 files, no impossibilities.
+# C:\Program Files\JetBrai 
+ns\GoLand 2021.1\bin (key C:/Program Files/JetBrains/GoLand 2021.1/bin, mtime 1618889814): 31 files, no impossibilities.
 # C:\Python26: could not be stat'd.
 # C:\MinGW\bin (key C:/MinGW/bin, mtime 1591327694): 148 files, no impossibilities.
-# C:\Users\13013\AppData\Local\Programs\Microsoft VS Code\bin (key C:/Users/13013/AppData/Local/Programs/Microsoft VS Code/bin, mtime 1657672318): 4 files, no impossibilities.
+# C:\Users\13013\AppData\Local\Programs\Microsoft VS Code\bin (key C:/Users/13013/AppData/Local/Programs/Microsoft VS Code/bin, mtime 1661218351): 4 files, no impossibilities.
 # C:\Program Files\CMake\bin (key C:/Program Files/CMake/bin, mtime 1615472659): 7 files, no impossibilities.
-# C:\WINDOWS (key C:/WINDOWS, mtime 1608876358): 145 files, no impossibilities.
+# C:\WINDOWS (key C:/WINDOWS, mtime 1608876358): 146 files, no impossibilities.
 # D:\Software\Matlab\polyspace\bin (key D:/Software/Matlab/polyspace/bin, mtime 1649492148): 82 files, no impossibilities.
 # C:\Program Files\nodejs\ (key C:/Program Files/nodejs/, mtime 1649515097): 13 files, no impossibilities.
 # C:\Program Files (x86)\MuMu\emulator\nemu\vmonitor\bin (key C:/Program Files (x86)/MuMu/emulator/nemu/vmonitor/bin, mtime 1652237468): 5 files, no impossibilities.
@@ -278,10 +280,11 @@ USERDOMAIN_ROAMINGPROFILE = MSI
 # C:\Program Files\OpenVPN\bin (key C:/Program Files/OpenVPN/bin, mtime 1656057127): 10 files, no impossibilities.
 # D:\Software\XFTP\ (key D:/Software/XFTP/, mtime 1647659389): 27 files, no impossibilities.
 # C:\Program Files\Common Files\Oracle\Java\javapath (key C:/Program Files/Common Files/Oracle/Java/javapath, mtime 1655089989): 6 files, no impossibilities.
-# C:\Program Files\dotnet\ (key C:/Program Files/dotnet/, mtime 1652493467): 11 files, no impossibilities.
-# D:\Software\Xshell\ (key D:/Software/Xshell/, mtime 1647659254): 39 files, no impossibilities.
+# C:\Program Files\dotnet\ (key C:/Program Files/dotnet/, mtime 1652493467):  
+11 files, no impossibilities.
+# D:\Software\Xshell\ (key D:/Software/Xshell/, mtime 1658663751): 39 files, no impossibilities.
 # C:\Program Files (x86)\Nmap (key C:/Program Files (x86)/Nmap, mtime 1614991350): 37 files, no impossibilities.
-# C:\WINDOWS\system32 (key C:/WINDOWS/system32, mtime 1658017413): 3272 files, no impossibilities.
+# C:\WINDOWS\system32 (key C:/WINDOWS/system32, mtime 1661340326): 3274 files, no impossibilities.
 # C:\Program Files (x86)\Pandoc (key C:/Program Files (x86)/Pandoc, mtime 1587449724): 7 files, no impossibilities.
 # C:\Program Files (x86)\CMake\bin: could not be stat'd.
 # C:\Go\bin (key C:/Go/bin, mtime 1633184298): 4 files, no impossibilities.
@@ -294,7 +297,7 @@ USERDOMAIN_ROAMINGPROFILE = MSI
 # D:\Software\Matlab\runtime\win64 (key D:/Software/Matlab/runtime/win64, mtime 1649491986): 10 files, no impossibilities.
 # C:\Windows\System32\WindowsPowerShell\v1.0 (key C:/Windows/System32/WindowsPowerShell/v1.0, mtime 1617775745): 32 files, no impossibilities.
 
-# 4801 files, no impossibilities in 55 directories.
+# 4805 files, no impossibilities in 55 directories.
 
 # Implicit Rules
 
@@ -350,15 +353,15 @@ GNUmakefile:
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 9 (8) / strings = 4600 / storage = 69705 B / avg = 15 B
-# current buf: size = 8174 B / used = 4381 B / count = 285 / avg = 15 B
-# other used: total = 61531 B / count = 4315 / avg = 14 B
-# other free: total = 68 B / max = 12 B / min = 4 B / avg = 8 B
+# strcache buffers: 9 (8) / strings = 4604 / storage = 69755 B / avg = 15 B
+# current buf: size = 8174 B / used = 4425 B / count = 288 / avg = 15 B
+# other used: total = 61581 B / count = 4316 / avg = 14 B
+# other free: total = 62 B / max = 12 B / min = 1 B / avg = 7 B
 
-# strcache performance: lookups = 4864 / hit rate = 5%
+# strcache performance: lookups = 4868 / hit rate = 5%
 # hash-table stats:
-# Load=4600/8192=56%, Rehash=0, Collisions=2490/4864=51%
-# Finished Make data base on Sun Jul 17 09:07:50 2022
+# Load=4604/8192=56%, Rehash=0, Collisions=2496/4868=51%
+# Finished Make data base on Wed Aug 24 20:58:27 2022
 
  
 make.exe: *** No rule to make target 'all'.  Stop.
